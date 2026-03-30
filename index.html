@@ -1,0 +1,2195 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>הסקוושיה של גאיה</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <meta property="og:title" content="הסקוושיה של גאיה 🌟">
+  <meta property="og:description" content="סקוושים רכים ומתוקים במחירים משתלמים — לחצי להזמנה!">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#5cb85c">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="הסקוושיה של גאיה">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Rubik', 'Segoe UI', Arial, sans-serif; }
+
+    body {
+      font-family: 'Rubik', 'Segoe UI', Arial, sans-serif;
+      direction: rtl;
+      background: #a8e4f0;
+    }
+
+    /* ===== שמיים + כותרת ===== */
+    header {
+      background: linear-gradient(180deg,
+        #5bc8f5 0%,
+        #7dd8f8 30%,
+        #a8eaff 65%,
+        #c8f4ff 100%
+      );
+      text-align: center;
+      padding: 55px 20px 45px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* עננים */
+    .clouds {
+      position: absolute;
+      top: 14px;
+      width: 100%;
+      font-size: 2.2rem;
+      display: flex;
+      justify-content: space-around;
+      opacity: 0.85;
+    }
+
+    /* קרני שמש */
+    .sun {
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90px;
+      height: 90px;
+      background: radial-gradient(circle, #ffe066 40%, #ffb300 70%, transparent 100%);
+      border-radius: 50%;
+      box-shadow: 0 0 40px 20px rgba(255, 200, 50, 0.4);
+    }
+
+    header h1 {
+      font-size: 4.4rem;
+      font-weight: 900;
+      color: white;
+      text-shadow: 3px 3px 0 #d4530a, 5px 5px 12px rgba(0,0,0,0.25);
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      color: #fff8e8;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== דשא מפריד ===== */
+    .grass-divider-wrap {
+      background: #fef9c3;
+      line-height: 0;
+    }
+    .grass-divider {
+      height: 50px;
+      background: #00c2b2;
+      clip-path: polygon(
+        0% 100%, 2% 20%, 4% 100%, 6% 15%, 8% 100%,
+        10% 25%, 12% 100%, 14% 10%, 16% 100%, 18% 20%,
+        20% 100%, 22% 15%, 24% 100%, 26% 25%, 28% 100%,
+        30% 10%, 32% 100%, 34% 20%, 36% 100%, 38% 15%,
+        40% 100%, 42% 25%, 44% 100%, 46% 10%, 48% 100%,
+        50% 20%, 52% 100%, 54% 15%, 56% 100%, 58% 25%,
+        60% 100%, 62% 10%, 64% 100%, 66% 20%, 68% 100%,
+        70% 15%, 72% 100%, 74% 25%, 76% 100%, 78% 10%,
+        80% 100%, 82% 20%, 84% 100%, 86% 15%, 88% 100%,
+        90% 25%, 92% 100%, 94% 10%, 96% 100%, 98% 20%,
+        100% 100%
+      );
+    }
+
+    /* ===== אזור מוצרים ===== */
+    .products-area {
+      background: linear-gradient(180deg, #5cb85c 0%, #7dc87d 15%, #c8f0b0 50%, #e8ffd8 100%);
+      padding-bottom: 70px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-title {
+      text-align: center;
+      padding: 40px 0 10px;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: #2d6e2d;
+      text-shadow: 1px 1px 0 #a8e898;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 28px;
+      padding: 30px 30px 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ===== כרטיס מוצר ===== */
+    .card {
+      background: white;
+      border-radius: 22px;
+      border: 3px solid #5cb85c;
+      box-shadow: 0 7px 0 #3a8a3a, 0 10px 20px rgba(0,0,0,0.12);
+      overflow: hidden;
+      text-align: center;
+      padding: 10px 10px 0;
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.5s;
+    }
+
+    .card:hover {
+      transform: translateY(-7px) rotate(1deg);
+      box-shadow: 0 14px 0 #3a8a3a, 0 18px 28px rgba(0,0,0,0.15);
+    }
+
+    .card img {
+      width: 100%;
+      height: 185px;
+      object-fit: cover;
+      border-radius: 12px 12px 0 0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    }
+
+    .card-body {
+      padding: 16px 14px 20px;
+      background: linear-gradient(180deg, #ffffff, #f2fff2);
+    }
+
+    .card-body h2 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #2d6e2d;
+      margin-bottom: 8px;
+    }
+
+    .price {
+      display: inline-block;
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #333;
+      background: #ffe135;
+      border: 2.5px dashed #f0b300;
+      border-radius: 12px;
+      padding: 3px 16px;
+      margin-bottom: 14px;
+      transform: rotate(-2deg);
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.13);
+    }
+
+    .order-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #ff6b1a, #ffb347);
+      color: white;
+      padding: 11px 22px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: bold;
+      box-shadow: 0 4px 0 #c44900;
+      transition: transform 0.12s, box-shadow 0.12s;
+      animation: btnPulse 2.5s ease-in-out infinite;
+    }
+
+    .order-btn:hover {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 #c44900;
+      animation: none;
+    }
+
+    @keyframes btnPulse {
+      0%, 100% { box-shadow: 0 4px 0 #c44900, 0 0 0 0 rgba(255,107,26,0); }
+      50%       { box-shadow: 0 4px 0 #c44900, 0 0 0 7px rgba(255,107,26,0.22); }
+    }
+
+    /* ===== בחירת צבע ===== */
+    .color-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    .color-chip {
+      border: 2.5px solid transparent;
+      border-radius: 20px;
+      padding: 5px 13px;
+      font-size: 0.82rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.12s, border-color 0.12s, box-shadow 0.12s;
+      color: white;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.35);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    }
+
+    .color-chip:hover { transform: scale(1.08); }
+
+    .color-chip.selected {
+      border-color: #333;
+      transform: scale(1.12);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    }
+
+    .color-note {
+      font-size: 0.83rem;
+      color: #d46a00;
+      font-weight: bold;
+      margin-bottom: 10px;
+      background: #fff8e8;
+      border-radius: 10px;
+      padding: 4px 10px;
+      display: inline-block;
+    }
+
+    /* ===== כפתור עגלה (FAB) ===== */
+    button.order-btn { border: none; cursor: pointer; font-family: 'Rubik', 'Segoe UI', Arial, sans-serif; }
+
+    #cartFab {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      z-index: 1000;
+      background: linear-gradient(135deg, #ff6b1a, #ffb347);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 13px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 5px 18px rgba(255,100,0,0.45);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Rubik', 'Segoe UI', Arial, sans-serif;
+      transition: transform 0.15s;
+    }
+    #cartFab:hover { transform: scale(1.06); }
+
+    #cartBadge {
+      background: white;
+      color: #ff6b1a;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+
+    /* ===== פאנל עגלה ===== */
+    #cartOverlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.38);
+      z-index: 1001;
+    }
+
+    #cartPanel {
+      position: fixed;
+      top: 0;
+      right: -380px;
+      width: 340px;
+      max-width: 92vw;
+      height: 100%;
+      background: white;
+      z-index: 1002;
+      box-shadow: -4px 0 24px rgba(0,0,0,0.18);
+      display: flex;
+      flex-direction: column;
+      transition: right 0.28s ease;
+      font-family: 'Rubik', 'Segoe UI', Arial, sans-serif;
+    }
+    #cartPanel.open { right: 0; }
+
+    #cartHeader {
+      background: linear-gradient(135deg, #5cb85c, #3a8a3a);
+      color: white;
+      padding: 17px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.15rem;
+      font-weight: bold;
+    }
+
+    #cartClose {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0 4px;
+    }
+
+    #cartItems {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px 16px;
+    }
+
+    .cart-empty {
+      text-align: center;
+      color: #bbb;
+      padding: 40px 0;
+      font-size: 1rem;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .cart-item-info { flex: 1; }
+
+    .cart-item-name {
+      font-size: 0.88rem;
+      font-weight: bold;
+      color: #2d6e2d;
+      margin-bottom: 2px;
+    }
+
+    .cart-item-price {
+      font-size: 0.82rem;
+      color: #ff6b1a;
+      font-weight: bold;
+    }
+
+    .cart-qty {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .qty-btn {
+      width: 26px;
+      height: 26px;
+      border: 2px solid #5cb85c;
+      background: white;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #3a8a3a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      padding: 0;
+    }
+    .qty-btn:hover { background: #e8ffe8; }
+
+    .qty-num {
+      font-weight: bold;
+      font-size: 0.95rem;
+      min-width: 18px;
+      text-align: center;
+    }
+
+    .remove-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      color: #ccc;
+      padding: 2px 4px;
+    }
+    .remove-btn:hover { color: #d00; }
+
+    #cartFooter {
+      padding: 14px 18px 18px;
+      border-top: 2px solid #efefef;
+      background: #f9fff9;
+    }
+
+    #cartTotal {
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: #2d6e2d;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    #sendOrderBtn {
+      display: block;
+      width: 100%;
+      background: linear-gradient(135deg, #25d366, #128c5e);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 13px;
+      font-size: 0.97rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 0 #0a6640;
+      transition: transform 0.12s;
+      font-family: 'Rubik', 'Segoe UI', Arial, sans-serif;
+      margin-bottom: 8px;
+    }
+    #sendOrderBtn:hover { transform: translateY(2px); box-shadow: 0 2px 0 #0a6640; }
+
+    #clearCartBtn {
+      display: block;
+      width: 100%;
+      background: none;
+      border: 2px solid #ddd;
+      border-radius: 30px;
+      padding: 9px;
+      font-size: 0.88rem;
+      cursor: pointer;
+      color: #aaa;
+      font-family: 'Rubik', 'Segoe UI', Arial, sans-serif;
+    }
+    #clearCartBtn:hover { border-color: #d00; color: #d00; }
+
+    /* ===== פוטר ===== */
+    .grass-divider-bottom {
+      height: 50px;
+      background: #00c2b2;
+      clip-path: polygon(
+        0% 100%, 2% 20%, 4% 100%, 6% 15%, 8% 100%,
+        10% 25%, 12% 100%, 14% 10%, 16% 100%, 18% 20%,
+        20% 100%, 22% 15%, 24% 100%, 26% 25%, 28% 100%,
+        30% 10%, 32% 100%, 34% 20%, 36% 100%, 38% 15%,
+        40% 100%, 42% 25%, 44% 100%, 46% 10%, 48% 100%,
+        50% 20%, 52% 100%, 54% 15%, 56% 100%, 58% 25%,
+        60% 100%, 62% 10%, 64% 100%, 66% 20%, 68% 100%,
+        70% 15%, 72% 100%, 74% 25%, 76% 100%, 78% 10%,
+        80% 100%, 82% 20%, 84% 100%, 86% 15%, 88% 100%,
+        90% 25%, 92% 100%, 94% 10%, 96% 100%, 98% 20%,
+        100% 100%
+      );
+      transform: scaleY(-1);
+    }
+
+    footer {
+      background: #3a8a3a;
+      text-align: center;
+      padding: 28px 20px;
+      color: #d8ffd8;
+      font-size: 1rem;
+      font-weight: bold;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    }
+
+    /* ===== "על החנות" ===== */
+    .about-section {
+      background: linear-gradient(135deg, #fff9f0, #fff0e8);
+      padding: 32px 20px;
+      text-align: center;
+      border-bottom: 3px solid #ffcc99;
+    }
+    .about-card {
+      max-width: 520px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 24px;
+      padding: 26px 28px;
+      box-shadow: 0 6px 22px rgba(255,150,80,0.14);
+      border: 2px solid #ffd4a8;
+    }
+    .about-emoji { font-size: 3rem; margin-bottom: 8px; }
+    .about-card h2 { color: #c44900; font-size: 1.4rem; margin-bottom: 10px; font-weight: 900; }
+    .about-card p { color: #666; font-size: 0.97rem; line-height: 1.8; }
+
+    /* ===== סינון/מיון ===== */
+    .sort-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      padding: 18px 20px 0;
+    }
+    .sort-btn {
+      background: white;
+      border: 2px solid #5cb85c;
+      border-radius: 20px;
+      padding: 7px 16px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      cursor: pointer;
+      color: #3a8a3a;
+      transition: background 0.15s, color 0.15s;
+      font-family: 'Rubik', 'Segoe UI', Arial, sans-serif;
+    }
+    .sort-btn:hover, .sort-btn.active { background: #3a8a3a; color: white; }
+
+    /* ===== כמות בכרטיסייה ===== */
+    .card-qty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .card-qty-btn {
+      width: 28px; height: 28px;
+      border: 2px solid #ff6b1a;
+      background: white;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #ff6b1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      padding: 0;
+    }
+    .card-qty-btn:hover { background: #fff0e0; }
+    .card-qty-num { font-weight: 900; font-size: 1.05rem; min-width: 22px; text-align: center; }
+
+    /* ===== תגיות מוצרים ===== */
+    .card { position: relative; }
+    .product-badge {
+      position: absolute;
+      top: 12px;
+      left: -4px;
+      color: white;
+      font-size: 0.72rem;
+      font-weight: 900;
+      padding: 4px 10px 4px 8px;
+      border-radius: 0 4px 4px 0;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.22);
+      z-index: 2;
+      background: #ff6b35;
+    }
+    .product-badge.new { background: #00b4d8; }
+
+    /* ===== לייטבוקס ===== */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+    #lightbox img {
+      max-width: 88vw;
+      max-height: 84vh;
+      border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+      object-fit: contain;
+      animation: zoomIn 0.2s ease;
+    }
+    @keyframes zoomIn {
+      from { transform: scale(0.7); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
+    }
+
+    /* ===== WhatsApp FAB ===== */
+    #waFab {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1000;
+      background: #25d366;
+      color: white;
+      border-radius: 50%;
+      width: 58px;
+      height: 58px;
+      font-size: 1.65rem;
+      box-shadow: 0 5px 18px rgba(37,211,102,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s;
+      text-decoration: none;
+    }
+    #waFab:hover { transform: scale(1.1); }
+
+    /* ===== אנימציית טיסה ===== */
+    .fly-item {
+      position: fixed;
+      z-index: 9999;
+      font-size: 1.5rem;
+      pointer-events: none;
+      transition: left 0.55s cubic-bezier(0.25,0.46,0.45,0.94),
+                  top  0.55s cubic-bezier(0.25,0.46,0.45,0.94),
+                  transform 0.55s ease,
+                  opacity 0.55s ease;
+    }
+
+    /* תמונות מוצר - עם cursor zoom */
+    .card img { cursor: zoom-in; }
+
+    /* ===== כוכבים צפים ===== */
+    .floating-star {
+      position: absolute;
+      pointer-events: none;
+      font-size: 1.1rem;
+      opacity: 0;
+      animation: floatStar 5s ease-in-out infinite;
+      z-index: 0;
+    }
+    @keyframes floatStar {
+      0%   { opacity: 0; transform: translateY(0) scale(0.6); }
+      20%  { opacity: 0.75; }
+      80%  { opacity: 0.6; }
+      100% { opacity: 0; transform: translateY(-160px) scale(1.1); }
+    }
+
+    /* ===== אנימציית כניסה (גלילה) ===== */
+    .scroll-hidden {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .scroll-hidden.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== בועות הדר ===== */
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.28);
+      border: 2px solid rgba(255,255,255,0.55);
+      pointer-events: none;
+      animation: floatBubble ease-in infinite;
+    }
+    @keyframes floatBubble {
+      0%   { transform: translateY(0)     scale(1);    opacity: 0.75; }
+      60%  { transform: translateY(-55%)  scale(1.04); opacity: 0.45; }
+      100% { transform: translateY(-130%) scale(0.88); opacity: 0; }
+    }
+
+    /* ===== שורת משלוח ===== */
+    .shipping-bar {
+      background: linear-gradient(135deg, #00a896, #00c2b2);
+      color: white;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 11px 20px;
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+
+    /* ===== אפשרויות משלוח ===== */
+    .delivery-section-full {
+      background: linear-gradient(135deg, #f0fff4, #e8f8ff);
+      padding: 36px 20px 32px;
+      text-align: center;
+    }
+    .delivery-section-full h2 {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: #2d6e2d;
+      margin-bottom: 20px;
+    }
+    .delivery-section {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 20px 20px 0;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    .delivery-option {
+      flex: 1;
+      min-width: 160px;
+      background: white;
+      border-radius: 18px;
+      padding: 16px 14px;
+      text-align: center;
+      border: 2.5px solid #ffd4a8;
+      box-shadow: 0 4px 12px rgba(255,150,80,0.1);
+    }
+    .delivery-icon { font-size: 2rem; margin-bottom: 6px; }
+    .delivery-title { font-size: 0.95rem; font-weight: 900; color: #c44900; margin-bottom: 4px; }
+    .delivery-desc { font-size: 0.82rem; color: #777; }
+
+    /* ===== תמונת פרופיל ===== */
+    .about-photo {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      margin: 0 auto 14px;
+      box-shadow: 0 4px 16px rgba(255,107,157,0.4);
+      border: 4px solid white;
+    }
+
+    /* ===== מוצר השבוע ===== */
+    .featured-section {
+      background: linear-gradient(135deg, #fff9e6, #fff3cc);
+      border: 3px solid #ffd700;
+      border-radius: 24px;
+      margin: 22px 30px 6px;
+      padding: 22px 20px 20px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      box-shadow: 0 6px 22px rgba(255,215,0,0.3);
+      position: relative;
+    }
+    .featured-label {
+      position: absolute;
+      top: -14px;
+      right: 24px;
+      background: linear-gradient(135deg, #ffd700, #ffb300);
+      color: #333;
+      font-weight: 900;
+      font-size: 0.82rem;
+      padding: 5px 16px;
+      border-radius: 20px;
+      box-shadow: 0 3px 8px rgba(200,150,0,0.3);
+    }
+    .featured-img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.14);
+      flex-shrink: 0;
+      cursor: zoom-in;
+    }
+    .featured-info { flex: 1; text-align: right; }
+    .featured-info h3 { font-size: 1.1rem; font-weight: 900; color: #c44900; margin-bottom: 5px; }
+    .featured-price {
+      display: inline-block;
+      font-size: 1.25rem;
+      font-weight: 900;
+      color: #333;
+      background: #ffe135;
+      border: 2px dashed #f0b300;
+      border-radius: 10px;
+      padding: 2px 14px;
+      transform: rotate(-2deg);
+      margin-bottom: 8px;
+    }
+    .featured-info p { font-size: 0.84rem; color: #666; line-height: 1.6; margin-bottom: 10px; }
+
+    /* ===== חיפוש ===== */
+    .search-wrap {
+      display: flex;
+      justify-content: center;
+      padding: 16px 20px 0;
+    }
+    .search-input {
+      width: 100%;
+      max-width: 380px;
+      padding: 10px 20px;
+      border: 2.5px solid #5cb85c;
+      border-radius: 30px;
+      font-size: 0.93rem;
+      background: white;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      text-align: right;
+    }
+    .search-input:focus {
+      border-color: #ff6b1a;
+      box-shadow: 0 0 0 3px rgba(255,107,26,0.12);
+    }
+    .search-empty {
+      text-align: center;
+      color: #888;
+      padding: 28px;
+      font-size: 1rem;
+      display: none;
+    }
+
+    /* ===== מלאי ===== */
+    .card-body { position: relative; }
+    .stock-out-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.9);
+      border-radius: 0 0 18px 18px;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .stock-out-text {
+      background: #e53935;
+      color: white;
+      font-weight: 900;
+      font-size: 1rem;
+      padding: 6px 22px;
+      border-radius: 20px;
+    }
+    .notify-btn {
+      background: linear-gradient(135deg, #ff6b1a, #ffb347);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 7px 18px;
+      font-size: 0.82rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .stock-limited-tag {
+      position: absolute;
+      top: 12px;
+      right: -4px;
+      background: #ff9800;
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 900;
+      padding: 4px 10px 4px 6px;
+      border-radius: 4px 0 0 4px;
+      z-index: 4;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    }
+
+    /* ===== שיתוף ===== */
+    .share-btn {
+      background: none;
+      border: 1.5px solid #ddd;
+      border-radius: 16px;
+      padding: 4px 11px;
+      font-size: 0.75rem;
+      color: #999;
+      cursor: pointer;
+      margin-top: 7px;
+      transition: border-color 0.12s, color 0.12s;
+    }
+    .share-btn:hover { border-color: #25d366; color: #25d366; }
+
+    /* ===== ביקורות ===== */
+    .testimonials-section {
+      background: linear-gradient(135deg, #fff9f0, #fff0f8);
+      padding: 44px 20px 40px;
+      text-align: center;
+    }
+    .testimonials-section h2 { font-size: 1.5rem; font-weight: 900; color: #c44900; margin-bottom: 6px; }
+    .testimonials-sub { color: #888; font-size: 0.88rem; margin-bottom: 24px; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+      gap: 16px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .testimonial-card {
+      background: white;
+      border-radius: 18px;
+      padding: 18px 15px;
+      box-shadow: 0 4px 16px rgba(255,150,80,0.12);
+      border: 2px solid #ffd4a8;
+      text-align: right;
+    }
+    .t-stars { font-size: 1rem; margin-bottom: 7px; }
+    .t-text { font-size: 0.86rem; color: #555; line-height: 1.7; margin-bottom: 9px; }
+    .t-name { font-size: 0.78rem; font-weight: bold; color: #c44900; }
+
+    /* ===== חזרה למעלה ===== */
+    #backToTop {
+      position: fixed;
+      bottom: 86px;
+      left: 24px;
+      z-index: 998;
+      background: linear-gradient(135deg, #5cb85c, #3a8a3a);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 46px;
+      height: 46px;
+      font-size: 1.25rem;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(60,140,60,0.4);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s;
+    }
+    #backToTop.show { display: flex; }
+    #backToTop:hover { transform: scale(1.1); }
+
+    /* ===== תפריט ניווט ===== */
+    .site-nav {
+      background: white;
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+      border-bottom: 3px solid #f0f0f0;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .nav-logo { display: none; }
+    .nav-links { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+    .nav-link {
+      text-decoration: none;
+      color: #2d6e2d;
+      font-weight: bold;
+      font-size: 0.88rem;
+      padding: 7px 16px;
+      border-radius: 20px;
+      border: 2px solid #5cb85c;
+      transition: background 0.15s, color 0.15s;
+    }
+    .nav-link:hover { background: #5cb85c; color: white; }
+
+    /* ===== קטגוריות ===== */
+    .categories-section {
+      background: linear-gradient(180deg, #fff5fb, #ffeeff);
+      padding: 36px 20px 40px;
+    }
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+      gap: 16px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .category-card {
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 5px 16px rgba(0,0,0,0.1);
+      transition: transform 0.18s, box-shadow 0.18s;
+      background: white;
+      border: 3px solid transparent;
+    }
+    .category-card:hover { transform: translateY(-5px); box-shadow: 0 10px 24px rgba(0,0,0,0.15); }
+    .category-card.active { border-color: #ff6b1a; }
+    .category-card img { width: 100%; height: 150px; object-fit: cover; }
+    .cat-no-img {
+      width: 100%; height: 150px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem;
+      background: linear-gradient(135deg, #e8d5ff, #d5e8ff);
+    }
+    .category-card-name {
+      text-align: center;
+      font-weight: 900;
+      font-size: 1rem;
+      color: #333;
+      padding: 12px 8px;
+    }
+    .cat-filter-bar { text-align: center; margin-top: 18px; }
+    .cat-clear-btn {
+      background: none;
+      border: 2px solid #ccc;
+      border-radius: 20px;
+      padding: 7px 20px;
+      font-size: 0.87rem;
+      cursor: pointer;
+      color: #888;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .cat-clear-btn:hover { border-color: #ff6b1a; color: #ff6b1a; }
+
+    /* ===== גאיה תבחרי לי ===== */
+    .gaia-pick-panel {
+      max-width: 420px;
+      margin: 26px auto 0;
+      background: linear-gradient(135deg, #fff0fa, #ffeeff);
+      border-radius: 24px;
+      padding: 32px 24px 28px;
+      box-shadow: 0 8px 28px rgba(255,100,180,0.15);
+      border: 2.5px solid #ffb3e0;
+      text-align: center;
+    }
+    .gaia-pick-panel h3 { font-size: 1.4rem; font-weight: 900; color: #c44900; margin-bottom: 8px; }
+    .gaia-pick-panel p { color: #888; font-size: 0.9rem; margin-bottom: 20px; }
+    .gaia-pick-form { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .gaia-pick-form input {
+      border: 2px solid #ffb3e0;
+      border-radius: 14px;
+      padding: 10px 16px;
+      font-size: 1rem;
+      font-family: 'Rubik', sans-serif;
+      outline: none;
+      width: 150px;
+      text-align: center;
+    }
+    .gaia-pick-form input:focus { border-color: #ff6b9d; }
+    .gaia-pick-form button {
+      background: linear-gradient(135deg, #ff6b9d, #ff8fb3);
+      color: white;
+      border: none;
+      border-radius: 14px;
+      padding: 10px 22px;
+      font-size: 1rem;
+      font-weight: 900;
+      font-family: 'Rubik', sans-serif;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .gaia-pick-form button:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(255,100,150,0.35); }
+
+    html { scroll-behavior: smooth; }
+
+    /* ===== Progress bar גלילה ===== */
+    #scrollProgress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 4px;
+      width: 0%;
+      background: linear-gradient(90deg, #ff6b1a, #ffd700, #5cb85c);
+      z-index: 9999;
+      transition: width 0.08s linear;
+      border-radius: 0 2px 2px 0;
+    }
+
+    /* ===== Shimmer מוצר השבוע ===== */
+    @keyframes featuredGlow {
+      0%, 100% { box-shadow: 0 6px 22px rgba(255,215,0,0.3); }
+      50%       { box-shadow: 0 6px 30px rgba(255,215,0,0.65), 0 0 22px 6px rgba(255,200,0,0.25); }
+    }
+    .featured-section { animation: featuredGlow 2.2s ease-in-out infinite; }
+
+    /* ===== 3D tilt כרטיסים ===== */
+    .card { transform-style: preserve-3d; will-change: transform; }
+
+    /* ===== ביקורות — גלילה אופקית במובייל ===== */
+    @media (max-width: 620px) {
+      .testimonials-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 14px;
+        padding-bottom: 14px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .testimonials-grid::-webkit-scrollbar { height: 5px; }
+      .testimonials-grid::-webkit-scrollbar-thumb { background: #ffd4a8; border-radius: 4px; }
+      .testimonial-card {
+        min-width: 230px;
+        scroll-snap-align: start;
+        flex-shrink: 0;
+      }
+    }
+
+    /* ===== CTA (קריאה לפעולה) ===== */
+    .cta-section {
+      background: linear-gradient(135deg, #2d6e2d, #5cb85c);
+      text-align: center;
+      padding: 50px 20px;
+      color: white;
+    }
+    .cta-section h2 {
+      font-size: 1.7rem;
+      font-weight: 900;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    .cta-section p { font-size: 1rem; opacity: 0.88; margin-bottom: 22px; }
+    .cta-btn {
+      display: inline-block;
+      background: white;
+      color: #2d6e2d;
+      font-size: 1.1rem;
+      font-weight: 900;
+      padding: 14px 38px;
+      border-radius: 40px;
+      text-decoration: none;
+      box-shadow: 0 6px 22px rgba(0,0,0,0.18);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.22); }
+
+    /* ===== פוטר משודרג ===== */
+    footer {
+      background: #1e4d1e;
+      color: #d8ffd8;
+      padding: 0;
+    }
+    .footer-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 32px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .footer-logo {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: #ffe066;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .footer-links a {
+      color: #c8ffc8;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: bold;
+      padding: 5px 14px;
+      border: 1.5px solid rgba(200,255,200,0.3);
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .footer-links a:hover { background: rgba(255,255,255,0.1); color: white; }
+    .footer-copy {
+      font-size: 0.8rem;
+      color: #88bb88;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 14px;
+      width: 100%;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div id="scrollProgress"></div>
+
+<nav class="site-nav">
+  <div class="nav-logo">🌸 הסקוושיה של גאיה</div>
+  <div class="nav-links">
+    <a class="nav-link" href="#shop" onclick="clearCatFilter()">🛍️ חנות</a>
+    <a class="nav-link" href="#categories">🗂️ קטגוריות</a>
+    <a class="nav-link" href="#contact">📞 יצירת קשר</a>
+  </div>
+</nav>
+
+<header>
+  <div class="clouds">
+    <span>☁️</span><span>☁️</span><span>☁️</span><span>☁️</span>
+  </div>
+  <div class="sun"></div>
+  <h1>🌸 הסקוושיה של גאיה 🌸</h1>
+  <p>סקוושים רכים ומתוקים — לחצו להזמנה!</p>
+</header>
+
+<div class="shipping-bar">
+  <span>🚚 משלוח בתשלום</span>
+  <span>🤝 איסוף עצמי</span>
+  <span>💬 שירות אישי</span>
+</div>
+
+<section class="about-section">
+  <div class="about-card">
+    <img class="about-photo" src="גאיה.jpeg" alt="גאיה">
+    <h2>היי! אני גאיה 👋</h2>
+    <p>אני אוספת ומוכרת סקוושים רכים ומגניבים!<br>
+    כל הסקוושים שלי הם אמיתיים ואיכותיים 💕<br>
+    יש לכן שאלות? שלחו לי הודעה בוואטסאפ!</p>
+  </div>
+</section>
+
+<div class="grass-divider-wrap"><div class="grass-divider"></div></div>
+
+<div class="products-area" id="shop">
+
+  <div class="featured-section">
+    <span class="featured-label">⭐ מוצר השבוע</span>
+    <img class="featured-img" src="ברווז מפריח בועה.jpg" alt="ברווז מפריח בועה" onclick="openZoom(this)" style="object-fit:contain;background:#f9f9f9;">
+    <div class="featured-info">
+      <h3>ברווז מפריח בועה</h3>
+      <div class="featured-price">6 ש"ח</div>
+      <p>הברווז הכי חמוד! 🫧<br>זמין בצבעים ורוד וצהוב</p>
+      <button class="order-btn" onclick="scrollToProduct('ברווז מפריח בועה')" style="font-size:0.82rem;padding:8px 18px;animation:none">👇 לחצי לפרטים</button>
+    </div>
+  </div>
+
+  <div class="section-title">🛍️ המוצרים שלנו</div>
+  <div class="search-wrap">
+    <input type="text" id="searchInput" class="search-input" placeholder="🔍 חפשי מוצר..." oninput="searchProducts(this.value)">
+  </div>
+  <div class="sort-bar">
+    <button class="sort-btn active" onclick="sortProducts('all',this)">הכל</button>
+    <button class="sort-btn" onclick="sortProducts('low',this)">💰 מהזול ליקר</button>
+    <button class="sort-btn" onclick="sortProducts('high',this)">💎 מהיקר לזול</button>
+    <button class="sort-btn" onclick="sortProducts('name',this)">א-ב לפי שם</button>
+  </div>
+  <div class="products">
+
+    <div class="card">
+      <img src="אפון נידו בשלושה צבעים.jpg" alt="אפון נידו בשלושה צבעים">
+      <div class="card-body">
+        <h2>אפון נידו בשלושה צבעים</h2>
+        <div class="price">4 ש"ח</div>
+        <div class="color-chips">
+          <span class="color-chip" style="background:#ff69b4;opacity:0.45;text-decoration:line-through;cursor:default" title="אזל מהמלאי">ורוד</span>
+          <span class="color-chip" style="background:#e6b800" data-color="צהוב" onclick="selectColor(this)">צהוב</span>
+          <span class="color-chip" style="background:#00bfb3;opacity:0.45;text-decoration:line-through;cursor:default" title="אזל מהמלאי">טורקיז</span>
+        </div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין אפון נידו" target="_blank" data-base="אפון נידו">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="אקסולטל קרח בשלושה צבעים.jpg" alt="אקסולטל קרח">
+      <div class="card-body">
+        <h2>אקסולטל קרח בשלושה צבעים</h2>
+        <div class="price">6 ש"ח</div>
+        <div class="color-chips">
+          <span class="color-chip" style="background:#e6b800" data-color="צהוב" onclick="selectColor(this)">צהוב</span>
+        </div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין אקסולטל קרח" target="_blank" data-base="אקסולטל קרח">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="ארנב מוציא עיניים.jpg" alt="ארנב מוציא עיניים">
+      <div class="card-body">
+        <h2>ארנב מוציא עיניים</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין ארנב מוציא עיניים" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="ארנב נידו.jpg" alt="ארנב נידו">
+      <div class="card-body">
+        <h2>ארנב נידו</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין ארנב נידו" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="ארנבה נידו גזר בשני צבעים.jpg" alt="ארנבה נידו גזר">
+      <div class="card-body">
+        <h2>ארנבה נידו גזר בשני צבעים</h2>
+        <div class="price">6 ש"ח</div>
+        <div class="color-chips">
+          <span class="color-chip" style="background:#e6b800" data-color="צהוב" onclick="selectColor(this)">צהוב</span>
+          <span class="color-chip" style="background:#00bfb3" data-color="טורקיז" onclick="selectColor(this)">טורקיז</span>
+        </div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין ארנבה נידו גזר" target="_blank" data-base="ארנבה נידו גזר">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="ביצת מיים סגולה.jpg" alt="ביצת מיים סגולה">
+      <div class="card-body">
+        <h2>ביצת מיים סגולה</h2>
+        <div class="price">5 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין ביצת מיים סגולה" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="ביצת מיים.jpg" alt="ביצת מיים">
+      <div class="card-body">
+        <h2>ביצת מיים</h2>
+        <div class="price">3 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין ביצת מיים" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="ביצת קרח סגולה.jpg" alt="ביצת קרח סגולה">
+      <div class="card-body">
+        <h2>ביצת קרח סגולה</h2>
+        <div class="price">5 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין ביצת קרח סגולה" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="דג קרח.jpg" alt="דג קרח">
+      <div class="card-body">
+        <h2>דג קרח</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין דג קרח" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="דמות נידו.jpg" alt="דמות נידו">
+      <div class="card-body">
+        <h2>דמות נידו</h2>
+        <div class="price">5 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין דמות נידו" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="חללית נידו בשני צבעים.jpg" alt="חללית נידו">
+      <div class="card-body">
+        <h2>חללית נידו בשני צבעים</h2>
+        <div class="price">5 ש"ח</div>
+        <div class="color-chips">
+          <span class="color-chip" style="background:#00bfb3" data-color="טורקיז" onclick="selectColor(this)">טורקיז</span>
+          <span class="color-chip" style="background:#e6b800;opacity:0.45;text-decoration:line-through;cursor:default" title="אזל מהמלאי">צהוב</span>
+        </div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין חללית נידו" target="_blank" data-base="חללית נידו">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="חמור סגול מוציא עיניים.jpg" alt="חמור סגול מוציא עיניים">
+      <div class="card-body">
+        <h2>חמור סגול מוציא עיניים</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין חמור סגול מוציא עיניים" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="חתול ורוד מוציא עיניים.jpg" alt="חתול ורוד מוציא עיניים">
+      <div class="card-body">
+        <h2>חתול ורוד מוציא עיניים</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין חתול ורוד מוציא עיניים" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="חתול צהוב מוציא עיניים.jpg" alt="חתול צהוב מוציא עיניים">
+      <div class="card-body">
+        <h2>חתול צהוב מוציא עיניים</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין חתול צהוב מוציא עיניים" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="כלב סגול מוציא עיניים.jpg" alt="כלב כחול מוציא עיניים">
+      <div class="card-body">
+        <h2>כלב כחול מוציא עיניים</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין כלב כחול מוציא עיניים" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="כלב שוכב מוציא עיניים חום.jpg" alt="כלב שוכב מוציא עיניים חום">
+      <div class="card-body">
+        <h2>כלב שוכב מוציא עיניים חום</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין כלב שוכב מוציא עיניים חום" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="לב נידו מיים.jpg" alt="לב נידו מיים">
+      <div class="card-body">
+        <h2>לב נידו מיים</h2>
+        <div class="price">5 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין לב נידו מיים" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="מקרון נידו בשני צבעים.jpg" alt="מקרון נידו">
+      <div class="card-body">
+        <h2>מקרון נידו בשני צבעים</h2>
+        <div class="price">4 ש"ח</div>
+        <div class="color-chips">
+          <span class="color-chip" style="background:#ff69b4" data-color="ורוד" onclick="selectColor(this)">ורוד</span>
+          <span class="color-chip" style="background:#ff7a1a" data-color="כתום" onclick="selectColor(this)">כתום</span>
+        </div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין מקרון נידו" target="_blank" data-base="מקרון נידו">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="סנטה נידו.jpg" alt="סנטה נידו">
+      <div class="card-body">
+        <h2>סנטה נידו</h2>
+        <div class="price">4 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין סנטה נידו" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="פופ אפ.jpg" alt="פופ אפ">
+      <div class="card-body">
+        <h2>פופ אפ</h2>
+        <div class="price">3 ש"ח</div>
+        <div class="color-note">🎨 זמין במגוון צבעים — ציינו בהזמנה!</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין פופ אפ (צבע: )" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="פנדה נידו בשני צבעים.jpg" alt="פנדה נידו">
+      <div class="card-body">
+        <h2>פנדה נידו בשני צבעים</h2>
+        <div class="price">6 ש"ח</div>
+        <div class="color-chips">
+          <span class="color-chip" style="background:#00bfb3" data-color="טורקיז" onclick="selectColor(this)">טורקיז</span>
+          <span class="color-chip" style="background:#ff69b4" data-color="ורוד" onclick="selectColor(this)">ורוד</span>
+        </div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין פנדה נידו" target="_blank" data-base="פנדה נידו">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="שייק נידו עם דמות קוריאנית.jpg" alt="שייק נידו">
+      <div class="card-body">
+        <h2>שייק נידו עם דמות קוריאנית</h2>
+        <div class="price">4 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין שייק נידו עם דמות קוריאנית" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="תרנגול נידו.jpg" alt="תרנגול נידו">
+      <div class="card-body">
+        <h2>תרנגול נידו</h2>
+        <div class="price">6 ש"ח</div>
+        <div class="color-note">☀️ משנה צבע לורוד בשמש!</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין תרנגול נידו" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="מניון מיים.jpg" alt="מיניון מיים">
+      <div class="card-body">
+        <h2>מיניון מיים</h2>
+        <div class="price">5 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין מיניון מיים" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="חתול לבן מוציא עיניים.jpeg" alt="חתול לבן מוציא עיניים">
+      <div class="card-body">
+        <h2>חתול לבן מוציא עיניים</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין חתול לבן מוציא עיניים" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="חתול אורביז.jpg" alt="חתול אורביז">
+      <div class="card-body">
+        <h2>חתול אורביז</h2>
+        <div class="price">5 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין חתול אורביז" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="פנדה נידו כתומה.jpeg" alt="פנדה נידו כתומה">
+      <div class="card-body">
+        <h2>פנדה נידו כתומה</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין פנדה נידו כתומה" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="ברווז מיים.jpg" alt="ברווז מיים">
+      <div class="card-body">
+        <h2>ברווז מיים</h2>
+        <div class="price">5 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין ברווז מיים" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="ברווז מפריח בועה.jpg" alt="ברווז מפריח בועה" style="object-fit:contain;background:#f9f9f9;">
+      <div class="card-body">
+        <h2>ברווז מפריח בועה</h2>
+        <div class="price">6 ש"ח</div>
+        <div class="color-chips">
+          <span class="color-chip" style="background:#ff69b4" data-color="ורוד" onclick="selectColor(this)">ורוד</span>
+          <span class="color-chip" style="background:#e6b800" data-color="צהוב" onclick="selectColor(this)">צהוב</span>
+        </div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין ברווז מפריח בועה" target="_blank" data-base="ברווז מפריח בועה">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="תות מיים.jpg" alt="תות מיים">
+      <div class="card-body">
+        <h2>תות מיים</h2>
+        <div class="price">5 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין תות מיים" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="בננה קרח.jpg" alt="בננה קרח">
+      <div class="card-body">
+        <h2>בננה קרח</h2>
+        <div class="price">5 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין בננה קרח" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="עכבר מיים שחור.jpg" alt="עכבר מיים שחור">
+      <div class="card-body">
+        <h2>עכבר מיים שחור</h2>
+        <div class="price">5 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין עכבר מיים שחור" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="חיפושית נידו סגולה.jpg" alt="חיפושית נידו סגולה">
+      <div class="card-body">
+        <h2>חיפושית נידו סגולה</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין חיפושית נידו סגולה" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="דרגון פרוט נידו.jpg" alt="דרגון פרוט נידו">
+      <div class="card-body">
+        <h2>דרגון פרוט נידו</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין דרגון פרוט נידו" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="פופ אפ קקטוס.jpg" alt="פופ אפ קקטוס">
+      <div class="card-body">
+        <h2>פופ אפ קקטוס</h2>
+        <div class="price">3 ש"ח</div>
+        <div class="color-chips">
+          <span class="color-chip" style="background:#40c4ff" data-color="תכלת" onclick="selectColor(this)">תכלת</span>
+          <span class="color-chip" style="background:#4caf50" data-color="ירוק" onclick="selectColor(this)">ירוק</span>
+        </div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין פופ אפ קקטוס" target="_blank" data-base="פופ אפ קקטוס">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="פופ אפ קקטוס 1.jpeg" alt="פופ אפ קקטוס">
+      <div class="card-body">
+        <h2>פופ אפ קקטוס</h2>
+        <div class="price">3 ש"ח</div>
+        <div class="color-chips">
+          <span class="color-chip" style="background:#ff69b4" data-color="ורוד" onclick="selectColor(this)">ורוד</span>
+          <span class="color-chip" style="background:#e6b800" data-color="צהוב" onclick="selectColor(this)">צהוב</span>
+        </div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין פופ אפ קקטוס" target="_blank" data-base="פופ אפ קקטוס">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="search-empty" id="searchEmpty">לא נמצאו מוצרים 🌿</div>
+  </div>
+</div>
+
+<section class="categories-section" id="categories">
+  <h2 style="text-align:center;font-size:1.6rem;font-weight:900;color:#c44900;padding:0 0 6px;margin-bottom:4px;">🗂️ קטגוריות</h2>
+  <p style="text-align:center;color:#888;font-size:0.88rem;margin-bottom:22px;">בחרי קטגוריה לסינון המוצרים</p>
+  <div class="categories-grid" id="categoriesGrid"></div>
+  <div class="cat-filter-bar">
+    <button class="cat-clear-btn" id="catClearBtn" style="display:none" onclick="clearCatFilter()">✕ הצג את כל המוצרים</button>
+  </div>
+  <div class="gaia-pick-panel" id="gaiaPick" style="display:none">
+    <div style="font-size:2.5rem;margin-bottom:8px">🎁</div>
+    <h3>גאיה תבחרי לי!</h3>
+    <p>הכניסי תקציב ואני אבחר לך סקוושי מושלם 💕</p>
+    <div class="gaia-pick-form">
+      <input type="number" id="gaiaBudget" placeholder='תקציב בש"ח' min="1" max="999">
+      <button onclick="sendGaiaPickRequest()">💬 שלחי לגאיה!</button>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials-section">
+  <h2>💬 מה אומרים הלקוחות</h2>
+  <p class="testimonials-sub">ביקורות אמיתיות מלקוחות מרוצים ⭐</p>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="t-stars">⭐⭐⭐⭐⭐</div>
+      <div class="t-text">"הסקוושי הכי רך שקניתי!! גאיה שולחת מהר ועוטפת בצורה הכי חמודה 🎀"</div>
+      <div class="t-name">— נועה, 11</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="t-stars">⭐⭐⭐⭐⭐</div>
+      <div class="t-text">"הזמנתי את האקסולטל קרח ואני מתה עליו! בדיוק כמו בתמונה, ממליצה בחום 💙"</div>
+      <div class="t-name">— מיה, 12</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="t-stars">⭐⭐⭐⭐⭐</div>
+      <div class="t-text">"קניתי 3 סקוושים ביחד והמחיר היה מדהים! גאיה כל כך נחמדה 🌸"</div>
+      <div class="t-name">— ליה, 10</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="t-stars">⭐⭐⭐⭐⭐</div>
+      <div class="t-text">"ממש כיף להזמין! הגיע מהר ועם הפתעה קטנה בפנים 🎁 כבר הזמנתי שוב!"</div>
+      <div class="t-name">— שירה, 13</div>
+    </div>
+  </div>
+</section>
+
+<section class="delivery-section-full">
+  <h2>📦 משלוח ותשלום</h2>
+  <div class="delivery-section">
+    <div class="delivery-option">
+      <div class="delivery-icon">🤝</div>
+      <div class="delivery-title">איסוף עצמי</div>
+      <div class="delivery-desc">ללא עלות נוספת —<br>תיאום בוואטסאפ</div>
+    </div>
+    <div class="delivery-option">
+      <div class="delivery-icon">🚚</div>
+      <div class="delivery-title">משלוח בדואר ישראל</div>
+      <div class="delivery-desc">בתשלום נוסף —<br>לפי תעריפי הדואר</div>
+    </div>
+    <div class="delivery-option">
+      <div class="delivery-icon">💳</div>
+      <div class="delivery-title">תשלום בביט / פייבוקס</div>
+      <div class="delivery-desc">052-9451855</div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-section">
+  <h2>🛍️ מצאת משהו שאהבת?</h2>
+  <p>שלחי הודעה ונסגור הזמנה יחד! 💕</p>
+  <a href="https://wa.me/9720549544353" target="_blank" class="cta-btn">💬 לחצי להזמנה עכשיו</a>
+</div>
+
+<div class="grass-divider-wrap"><div class="grass-divider-bottom"></div></div>
+
+<footer id="contact">
+  <div class="footer-inner">
+    <div class="footer-logo">🌟 הסקוושיה של גאיה</div>
+    <div class="footer-links">
+      <a onclick="window.scrollTo({top:0,behavior:'smooth'})">🏠 ראשי</a>
+      <a onclick="document.querySelector('.products-area').scrollIntoView({behavior:'smooth'})">🛍️ מוצרים</a>
+      <a onclick="document.querySelector('.testimonials-section').scrollIntoView({behavior:'smooth'})">💬 ביקורות</a>
+      <a href="https://wa.me/9720549544353" target="_blank">📲 ווטסאפ</a>
+    </div>
+    <div class="footer-copy">📞 054-9544353 &nbsp;|&nbsp; סקוושים רכים ומתוקים 💕 &nbsp;|&nbsp; © גאיה 2025</div>
+  </div>
+</footer>
+
+<!-- לייטבוקס תמונות -->
+<div id="lightbox" onclick="closeLightbox()">
+  <img id="lightboxImg" src="" alt="תמונה מוגדלת">
+</div>
+
+<!-- חזרה למעלה -->
+<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="חזרה למעלה">↑</button>
+
+<!-- WhatsApp ישיר -->
+<a id="waFab" href="https://wa.me/9720549544353" target="_blank" title="שלחי לנו הודעה!">💬</a>
+
+<!-- כפתור עגלה צף -->
+<button id="cartFab" onclick="toggleCart()">
+  🛒 העגלה שלי
+  <span id="cartBadge">0</span>
+</button>
+
+<!-- הפרדה + פאנל -->
+<div id="cartOverlay" onclick="closeCart()"></div>
+<div id="cartPanel">
+  <div id="cartHeader">
+    <span>🛒 העגלה שלי</span>
+    <button id="cartClose" onclick="closeCart()">✕</button>
+  </div>
+  <div id="cartItems">
+    <div class="cart-empty">העגלה ריקה 🌿</div>
+  </div>
+  <div id="cartFooter">
+    <div id="cartTotal">סה"כ: 0 ש"ח</div>
+    <button id="sendOrderBtn" onclick="sendOrder()">📲 שלחי הזמנה בוואטסאפ</button>
+    <button id="clearCartBtn" onclick="clearCart()">🗑 נקי עגלה</button>
+  </div>
+</div>
+
+<script>
+  /* ===== בחירת צבע ===== */
+  function selectColor(chip) {
+    chip.closest('.color-chips').querySelectorAll('.color-chip')
+      .forEach(c => c.classList.remove('selected'));
+    chip.classList.add('selected');
+  }
+
+  /* ===== לייטבוקס ===== */
+  function openZoom(img) {
+    document.getElementById('lightboxImg').src = img.src;
+    document.getElementById('lightbox').style.display = 'flex';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+  }
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
+
+  /* ===== סינון/מיון ===== */
+  var originalOrder = [];
+  function sortProducts(mode, btn) {
+    document.querySelectorAll('.sort-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    var grid = document.querySelector('.products');
+    if (mode === 'all') {
+      originalOrder.forEach(function(card) { grid.appendChild(card); });
+      return;
+    }
+    var cards = Array.from(grid.querySelectorAll('.card'));
+    cards.sort(function(a, b) {
+      var pa = parseInt(a.querySelector('.price').textContent.match(/\d+/)[0]);
+      var pb = parseInt(b.querySelector('.price').textContent.match(/\d+/)[0]);
+      var na = a.querySelector('h2').textContent;
+      var nb = b.querySelector('h2').textContent;
+      if (mode === 'low')  return pa - pb;
+      if (mode === 'high') return pb - pa;
+      if (mode === 'name') return na.localeCompare(nb, 'he');
+      return 0;
+    });
+    cards.forEach(function(c) { grid.appendChild(c); });
+  }
+
+  /* ===== אנימציית טיסה לעגלה ===== */
+  function flyToCart(fromEl) {
+    var start = fromEl.getBoundingClientRect();
+    var fab   = document.getElementById('cartFab').getBoundingClientRect();
+    var flyEl = document.createElement('div');
+    flyEl.className = 'fly-item';
+    flyEl.textContent = '🛒';
+    flyEl.style.left = (start.left + start.width  / 2 - 12) + 'px';
+    flyEl.style.top  = (start.top  + start.height / 2 - 12) + 'px';
+    document.body.appendChild(flyEl);
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        flyEl.style.left      = (fab.left + fab.width  / 2 - 12) + 'px';
+        flyEl.style.top       = (fab.top  + fab.height / 2 - 12) + 'px';
+        flyEl.style.transform = 'scale(0.25)';
+        flyEl.style.opacity   = '0';
+      });
+    });
+    setTimeout(function() { flyEl.remove(); }, 620);
+  }
+
+  /* ===== עגלת קניות ===== */
+  var cart = [];
+
+  function saveCart() { localStorage.setItem('gaiaCart', JSON.stringify(cart)); }
+
+  function loadCart() {
+    try { cart = JSON.parse(localStorage.getItem('gaiaCart')) || []; } catch(e) { cart = []; }
+    renderCart();
+  }
+
+  function addToCart(btn) {
+    var card  = btn.closest('.card');
+    var name  = card.querySelector('h2').textContent.trim();
+    var price = parseInt(card.querySelector('.price').textContent.match(/\d+/)[0]);
+    var qtyEl = card.querySelector('.card-qty-num');
+    var qty   = qtyEl ? parseInt(qtyEl.textContent) : 1;
+
+    var chips        = card.querySelector('.color-chips');
+    var selectedChip = chips && chips.querySelector('.color-chip.selected');
+    if (chips && !selectedChip) {
+      chips.style.outline      = '2.5px solid #ff4444';
+      chips.style.borderRadius = '8px';
+      setTimeout(function() { chips.style.outline = ''; chips.style.borderRadius = ''; }, 900);
+      return;
+    }
+
+    var color = selectedChip ? selectedChip.dataset.color : null;
+    var key   = color ? name + ' (' + color + ')' : name;
+
+    var existing = cart.find(function(i) { return i.key === key; });
+    if (existing) { existing.qty += qty; }
+    else          { cart.push({ key: key, price: price, qty: qty }); }
+
+    if (qtyEl) qtyEl.textContent = '1';
+    saveCart();
+    renderCart();
+    flyToCart(btn);
+
+    var orig = btn.innerHTML;
+    btn.innerHTML = '✅ נוסף!';
+    btn.disabled  = true;
+    setTimeout(function() { btn.innerHTML = orig; btn.disabled = false; }, 1100);
+    openCart();
+  }
+
+  function renderCart() {
+    var itemsEl  = document.getElementById('cartItems');
+    var badge    = document.getElementById('cartBadge');
+    var totalEl  = document.getElementById('cartTotal');
+    var totalQty = cart.reduce(function(s,i) { return s + i.qty; }, 0);
+    var totalPrice = cart.reduce(function(s,i) { return s + i.price * i.qty; }, 0);
+
+    badge.textContent    = totalQty;
+    badge.style.display  = totalQty > 0 ? 'flex' : 'none';
+    totalEl.textContent  = 'סה"כ: ' + totalPrice + ' ש"ח';
+
+    if (cart.length === 0) { itemsEl.innerHTML = '<div class="cart-empty">העגלה ריקה 🌿</div>'; return; }
+
+    itemsEl.innerHTML = cart.map(function(item, i) {
+      return '<div class="cart-item">' +
+        '<div class="cart-item-info">' +
+          '<div class="cart-item-name">'  + item.key + '</div>' +
+          '<div class="cart-item-price">' + item.price + ' ש"ח × ' + item.qty + ' = ' + (item.price * item.qty) + ' ש"ח</div>' +
+        '</div>' +
+        '<div class="cart-qty">' +
+          '<button class="qty-btn" onclick="updateQty(' + i + ',-1)">−</button>' +
+          '<span class="qty-num">' + item.qty + '</span>' +
+          '<button class="qty-btn" onclick="updateQty(' + i + ',1)">+</button>' +
+        '</div>' +
+        '<button class="remove-btn" onclick="removeItem(' + i + ')">🗑</button>' +
+      '</div>';
+    }).join('');
+  }
+
+  function updateQty(i, delta) {
+    cart[i].qty += delta;
+    if (cart[i].qty <= 0) cart.splice(i, 1);
+    saveCart(); renderCart();
+  }
+  function removeItem(i) { cart.splice(i, 1); saveCart(); renderCart(); }
+  function clearCart()   { if (!cart.length) return; cart = []; saveCart(); renderCart(); }
+
+  function openCart()   { document.getElementById('cartPanel').classList.add('open');    document.getElementById('cartOverlay').style.display = 'block'; }
+  function closeCart()  { document.getElementById('cartPanel').classList.remove('open'); document.getElementById('cartOverlay').style.display = 'none';  }
+  function toggleCart() { document.getElementById('cartPanel').classList.contains('open') ? closeCart() : openCart(); }
+
+  function sendOrder() {
+    if (!cart.length) { alert('העגלה ריקה!'); return; }
+    var lines = cart.map(function(i) { return '• ' + i.key + ' × ' + i.qty + ' = ' + (i.price * i.qty) + ' ש"ח'; }).join('\n');
+    var total = cart.reduce(function(s,i) { return s + i.price * i.qty; }, 0);
+    window.open('https://wa.me/9720549544353?text=' + encodeURIComponent('היי גאיה! אני רוצה להזמין:\n' + lines + '\n\nסה"כ: ' + total + ' ש"ח'), '_blank');
+  }
+
+  /* ===== אתחול: תגיות, zoom, כמות, כפתורי עגלה ===== */
+  var BADGES = {
+    'ארנב מוציא עיניים':            { text: '🔥 פופולרי', cls: '' },
+    'חתול ורוד מוציא עיניים':       { text: '🔥 פופולרי', cls: '' },
+    'פנדה נידו בשני צבעים':         { text: '⭐ מומלץ',   cls: '' },
+    'אקסולטל קרח בשלושה צבעים':     { text: '✨ חדש',     cls: 'new' },
+    'לב נידו מיים':                 { text: '✨ חדש',     cls: 'new' },
+    'פופ אפ':                       { text: '💰 הכי זול', cls: '' },
+  };
+
+  document.querySelectorAll('.card').forEach(function(card) {
+    var name = card.querySelector('h2').textContent.trim();
+
+    // תגית מוצר
+    if (BADGES[name]) {
+      var badge = document.createElement('div');
+      badge.className = 'product-badge' + (BADGES[name].cls ? ' ' + BADGES[name].cls : '');
+      badge.textContent = BADGES[name].text;
+      card.appendChild(badge);
+    }
+
+    // תמונה ניתנת להגדלה
+    var img = card.querySelector('img');
+    img.addEventListener('click', function() { openZoom(img); });
+
+    // בורר כמות
+    var orderLink = card.querySelector('a.order-btn');
+    var qtyDiv = document.createElement('div');
+    qtyDiv.className = 'card-qty';
+    qtyDiv.innerHTML =
+      '<button class="card-qty-btn" onclick="changeCardQty(this,-1)">−</button>' +
+      '<span class="card-qty-num">1</span>' +
+      '<button class="card-qty-btn" onclick="changeCardQty(this,1)">+</button>';
+    orderLink.parentNode.insertBefore(qtyDiv, orderLink);
+  });
+
+  // שמור סדר מקורי לאיפוס מיון
+  originalOrder = Array.from(document.querySelectorAll('.card'));
+
+  // המר כפתורי WhatsApp לכפתורי עגלה
+  document.querySelectorAll('a.order-btn').forEach(function(link) {
+    var btn = document.createElement('button');
+    btn.className = 'order-btn';
+    btn.innerHTML = '🛒 הוסף לעגלה';
+    btn.setAttribute('onclick', 'addToCart(this)');
+    link.parentNode.replaceChild(btn, link);
+  });
+
+  function changeCardQty(btn, delta) {
+    var numEl = btn.parentElement.querySelector('.card-qty-num');
+    var v = Math.min(10, Math.max(1, parseInt(numEl.textContent) + delta));
+    numEl.textContent = v;
+  }
+
+  /* ===== מלאי ===== */
+  var STOCK = {
+    'פנדה נידו בשני צבעים':          'out',
+    'דג קרח':                         'out',
+    'שייק נידו עם דמות קוריאנית':    'limited',
+    'אקסולטל קרח בשלושה צבעים':      'limited',
+    'תרנגול נידו':                    'out',
+    'ארנב נידו':                      'out',
+    'חתול ורוד מוציא עיניים':        'limited',
+    'לב נידו מיים':                   'out',
+    'חתול אורביז':                    'out',
+    'מיניון מיים':                    'out',
+    'פנדה נידו כתומה':               'limited',
+    'ביצת מיים סגולה':               'out',
+    'דמות נידו':                     'out',
+    'כלב כחול מוציא עיניים':        'out',
+    'סנטה נידו':                     'limited',
+    'חתול לבן מוציא עיניים':        'limited',
+    'תות מיים':                      'limited',
+  };
+  document.querySelectorAll('.card').forEach(function(card) {
+    var name = card.querySelector('h2').textContent.trim();
+    if (STOCK[name] === 'out') {
+      var overlay = document.createElement('div');
+      overlay.className = 'stock-out-overlay';
+      overlay.innerHTML =
+        '<div class="stock-out-text">😔 אזל מהמלאי</div>' +
+        '<button class="notify-btn" onclick="notifyMe(\'' + name.replace(/'/g,"\\'") + '\')">📲 הודיעי לי כשיחזור</button>';
+      card.querySelector('.card-body').appendChild(overlay);
+    } else if (STOCK[name] === 'limited') {
+      var limitTag = document.createElement('div');
+      limitTag.className = 'stock-limited-tag';
+      limitTag.textContent = '⚠️ פריט אחרון במלאי';
+      card.appendChild(limitTag);
+    }
+  });
+  function notifyMe(name) {
+    window.open('https://wa.me/9720549544353?text=' + encodeURIComponent('היי גאיה! אני מעוניינת ב"' + name + '", תעדכני אותי כשיחזור למלאי 🙏'), '_blank');
+  }
+
+  /* ===== הזזת אזל לסוף ===== */
+  (function() {
+    var grid = document.querySelector('.products');
+    if (!grid) return;
+    var cards = Array.from(grid.querySelectorAll('.card'));
+    cards.forEach(function(card) {
+      var name = card.querySelector('h2').textContent.trim();
+      if (STOCK[name] === 'out') grid.appendChild(card);
+    });
+    var emptyEl = document.getElementById('searchEmpty');
+    if (emptyEl) grid.appendChild(emptyEl);
+  })();
+
+  /* ===== חיפוש ===== */
+  function searchProducts(query) {
+    var lower = query.trim().toLowerCase();
+    var cards = document.querySelectorAll('.card');
+    var visible = 0;
+    cards.forEach(function(card) {
+      var name = card.querySelector('h2').textContent.toLowerCase();
+      var show = !lower || name.includes(lower);
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    var emptyEl = document.getElementById('searchEmpty');
+    if (emptyEl) emptyEl.style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  /* ===== שיתוף מוצר ===== */
+  function shareProduct(name, price) {
+    var text = '✨ תראי! מצאתי "' + name + '" ב-' + price + ' בחנות של גאיה 🌟\nכנסי ותזמיני!';
+    if (navigator.share) {
+      navigator.share({ title: 'הסקוושיה של גאיה', text: text }).catch(function() {});
+    } else {
+      window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+    }
+  }
+
+  /* ===== גלילה למוצר ===== */
+  function scrollToProduct(name) {
+    var card = Array.from(document.querySelectorAll('.card')).find(function(c) {
+      return c.querySelector('h2').textContent.trim() === name;
+    });
+    if (card) {
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      card.style.outline = '3px solid #ffd700';
+      card.style.outlineOffset = '3px';
+      setTimeout(function() { card.style.outline = ''; card.style.outlineOffset = ''; }, 1800);
+    }
+  }
+
+  /* ===== חזרה למעלה + Progress bar ===== */
+  window.addEventListener('scroll', function() {
+    var btn = document.getElementById('backToTop');
+    if (window.scrollY > 350) btn.classList.add('show');
+    else btn.classList.remove('show');
+
+    var docH = document.documentElement.scrollHeight - window.innerHeight;
+    var pct  = docH > 0 ? (window.scrollY / docH) * 100 : 0;
+    document.getElementById('scrollProgress').style.width = pct + '%';
+  });
+
+  /* ===== 3D Tilt על כרטיסים ===== */
+  document.querySelectorAll('.card').forEach(function(card) {
+    card.addEventListener('mousemove', function(e) {
+      var r  = card.getBoundingClientRect();
+      var cx = r.width  / 2;
+      var cy = r.height / 2;
+      var x  = e.clientX - r.left  - cx;
+      var y  = e.clientY - r.top   - cy;
+      card.style.transform = 'perspective(700px) rotateX(' + (-y/cy*7) + 'deg) rotateY(' + (x/cx*7) + 'deg) translateY(-6px) scale(1.02)';
+    });
+    card.addEventListener('mouseleave', function() {
+      card.style.transform = '';
+    });
+  });
+
+  /* ===== כפתורי שיתוף על כרטיסים ===== */
+  document.querySelectorAll('.card').forEach(function(card) {
+    var name = card.querySelector('h2').textContent.trim();
+    var priceText = card.querySelector('.price').textContent.trim();
+    var body = card.querySelector('.card-body');
+    var sBtn = document.createElement('button');
+    sBtn.className = 'share-btn';
+    sBtn.textContent = '📤 שתפי';
+    sBtn.onclick = (function(n, p) { return function() { shareProduct(n, p); }; })(name, priceText);
+    body.appendChild(sBtn);
+  });
+
+  /* ===== צבעי פסטל לכרטיסים ===== */
+  var PASTELS = ['#fff0f5','#f0f8ff','#fffde7','#f0fff4','#fef3ff','#fff7f0','#e8f8ff','#fffff0'];
+  document.querySelectorAll('.card').forEach(function(card, i) {
+    card.style.background = PASTELS[i % PASTELS.length];
+  });
+
+  /* ===== אנימציית כניסה בגלילה ===== */
+  document.querySelectorAll('.card').forEach(function(card) {
+    card.classList.add('scroll-hidden');
+  });
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.card').forEach(function(card) { observer.observe(card); });
+
+  /* ===== כוכבים צפים ===== */
+  var STAR_EMOJIS = ['✨','⭐','🌟','💫','🌸'];
+  var productsArea = document.querySelector('.products-area');
+  for (var s = 0; s < 14; s++) {
+    (function() {
+      var star = document.createElement('span');
+      star.className = 'floating-star';
+      star.textContent = STAR_EMOJIS[Math.floor(Math.random() * STAR_EMOJIS.length)];
+      star.style.left = (Math.random() * 96) + '%';
+      star.style.top  = (20 + Math.random() * 70) + '%';
+      star.style.animationDelay    = (Math.random() * 5) + 's';
+      star.style.animationDuration = (4 + Math.random() * 4) + 's';
+      star.style.fontSize = (0.7 + Math.random() * 0.9) + 'rem';
+      productsArea.appendChild(star);
+    })();
+  }
+
+  /* ===== בועות בהדר ===== */
+  var headerEl = document.querySelector('header');
+  for (var b = 0; b < 18; b++) {
+    (function() {
+      var bub = document.createElement('div');
+      bub.className = 'bubble';
+      var size = 18 + Math.random() * 52;
+      bub.style.width            = size + 'px';
+      bub.style.height           = size + 'px';
+      bub.style.left             = (Math.random() * 94) + '%';
+      bub.style.bottom           = (-size) + 'px';
+      bub.style.animationDuration = (4 + Math.random() * 6) + 's';
+      bub.style.animationDelay   = (Math.random() * 6) + 's';
+      headerEl.appendChild(bub);
+    })();
+  }
+
+  /* ===== קטגוריות ===== */
+  var CATS = [
+    { name: 'נידו',         emoji: '🧸', color: '#fde8ff,#f5d0ff', img: 'נידו.png',                              products: ['אפון נידו בשלושה צבעים','ארנב נידו','ארנבה נידו גזר בשני צבעים','חללית נידו בשני צבעים','דמות נידו','מקרון נידו בשני צבעים','מפלצת נידו בשני צבעים','סנטה נידו','פנדה נידו בשני צבעים','שייק נידו עם דמות קוריאנית','תרנגול נידו','פנדה נידו כתומה','חיפושית נידו סגולה','דרגון פרוט נידו'] },
+    { name: 'מיים',         emoji: '💧', color: '#e0f4ff,#c8eeff', img: 'מיים.jpeg',                         products: ['ביצת מיים סגולה','ביצת מיים','לב נידו מיים','מיניון מיים','ברווז מיים','תות מיים','עכבר מיים שחור'] },
+    { name: 'קרח',          emoji: '🧊', color: '#e8f8ff,#d0f0ff', img: 'קרח.png',        products: ['אקסולטל קרח בשלושה צבעים','ביצת קרח סגולה','דג קרח','בננה קרח'] },
+    { name: 'מוציא עיניים', emoji: '👀', color: '#fff0e0,#ffe4c4', img: 'מוציא עיניים.png',     products: ['ארנב מוציא עיניים','חתול ורוד מוציא עיניים','חתול צהוב מוציא עיניים','חמור סגול מוציא עיניים','כלב כחול מוציא עיניים','כלב שוכב מוציא עיניים חום','חתול לבן מוציא עיניים'] },
+    { name: 'פופ אפים',     emoji: '🎯', color: '#fffbe0,#fff0c0', img: 'פופ אפים.png',          products: ['פופ אפ','פופ אפ קקטוס'] },
+    { name: 'מפריחי בועה',  emoji: '🫧', color: '#e8f8ff,#d0f0ff', img: 'מפריחי בועה.png',      products: ['ברווז מפריח בועה'] },
+    { name: 'אורביז',       emoji: '🔮', color: '#f0e8ff,#e0d0ff', img: 'אורביז.png',            products: ['חתול אורביז'] },
+    { name: 'גאיה תבחרי לי', emoji: '🎁', color: '#ffe8f4,#ffd0e8', img: 'גאיה תבחרי לי.png',  products: [], isGaiaPick: true },
+  ];
+
+  var activeCatIdx = null;
+
+  function buildCategoriesGrid() {
+    var grid = document.getElementById('categoriesGrid');
+    if (!grid) return;
+    CATS.forEach(function(cat, i) {
+      var card = document.createElement('div');
+      card.className = 'category-card';
+      var imgHtml = cat.img
+        ? '<img src="' + cat.img + '" alt="' + cat.name + '">'
+        : '<div class="cat-no-img" style="background:linear-gradient(135deg,'+cat.color+')">' + cat.emoji + '</div>';
+      card.innerHTML = imgHtml + '<div class="category-card-name">' + cat.name + '</div>';
+      card.addEventListener('click', function() { selectCategory(i); });
+      grid.appendChild(card);
+    });
+  }
+
+  function selectCategory(idx) {
+    var cat = CATS[idx];
+    activeCatIdx = idx;
+
+    document.querySelectorAll('.category-card').forEach(function(c, i) {
+      c.classList.toggle('active', i === idx);
+    });
+
+    document.getElementById('gaiaPick').style.display = 'none';
+    document.getElementById('catClearBtn').style.display = '';
+
+    if (cat.isGaiaPick) {
+      document.getElementById('gaiaPick').style.display = '';
+      return;
+    }
+
+    var cards = document.querySelectorAll('.products .card');
+    var anyVisible = false;
+
+    if (cat.products.length === 0) {
+      // קטגוריה ריקה — בקרוב
+      cards.forEach(function(c) { c.style.display = 'none'; });
+      var emptyEl = document.getElementById('searchEmpty');
+      if (emptyEl) { emptyEl.textContent = 'בקרוב! 🌸'; emptyEl.style.display = 'block'; }
+    } else {
+      cards.forEach(function(card) {
+        var name = card.querySelector('h2') ? card.querySelector('h2').textContent.trim() : '';
+        var show = cat.products.indexOf(name) !== -1;
+        card.style.display = show ? '' : 'none';
+        if (show) anyVisible = true;
+      });
+      var emptyEl = document.getElementById('searchEmpty');
+      if (emptyEl) { emptyEl.textContent = 'לא נמצאו מוצרים 🌿'; emptyEl.style.display = anyVisible ? 'none' : 'block'; }
+    }
+
+    var shopEl = document.getElementById('shop');
+    if (shopEl) shopEl.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function clearCatFilter() {
+    activeCatIdx = null;
+    document.querySelectorAll('.category-card').forEach(function(c) { c.classList.remove('active'); });
+    document.querySelectorAll('.products .card').forEach(function(c) { c.style.display = ''; });
+    document.getElementById('catClearBtn').style.display = 'none';
+    document.getElementById('gaiaPick').style.display = 'none';
+    var emptyEl = document.getElementById('searchEmpty');
+    if (emptyEl) { emptyEl.textContent = 'לא נמצאו מוצרים 🌿'; emptyEl.style.display = 'none'; }
+  }
+
+  function sendGaiaPickRequest() {
+    var budget = document.getElementById('gaiaBudget').value;
+    if (!budget || Number(budget) < 1) { alert('נא להכניס תקציב 😊'); return; }
+    var msg = encodeURIComponent('היי גאיה! 🌸 אני לא יודע/ת מה לבחור — תבחרי לי סקוושי בתקציב של ' + budget + ' ש"ח? 🎁');
+    window.open('https://wa.me/9720549544353?text=' + msg, '_blank');
+  }
+
+  buildCategoriesGrid();
+
+  loadCart();
+</script>
+</body>
+</html>
