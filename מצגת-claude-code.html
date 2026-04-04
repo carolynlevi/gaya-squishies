@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code — מה זה ומה עשיתי איתו</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;700;900&family=Secular+One&family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1117;
+    --navy2: #161b22;
+    --coral: #ff6b6b;
+    --mint: #00c9a7;
+    --yellow: #ffd166;
+    --lavender: #c77dff;
+    --sky: #4cc9f0;
+    --white: #f8f9fa;
+    --text-muted: #8b949e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Heebo', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    direction: rtl;
+  }
+
+  /* ===== SLIDES CONTAINER ===== */
+  .deck {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s cubic-bezier(0.4,0,0.2,1), transform 0.6s cubic-bezier(0.4,0,0.2,1);
+    transform: translateX(-40px);
+  }
+
+  .slide.active {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(0);
+  }
+
+  .slide.out {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+
+  /* ===== NAVIGATION ===== */
+  .nav {
+    position: fixed;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 100;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 12px 24px;
+    border-radius: 50px;
+  }
+
+  .nav-btn {
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.4rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .nav-btn:hover {
+    background: rgba(255,255,255,0.15);
+    transform: scale(1.1);
+  }
+
+  .dots {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .dot.active {
+    background: var(--yellow);
+    width: 24px;
+    border-radius: 4px;
+  }
+
+  .slide-counter {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-family: 'Heebo', sans-serif;
+    min-width: 40px;
+    text-align: center;
+  }
+
+  /* ===== KEYBOARD HINT ===== */
+  .key-hint {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.2);
+    font-family: 'Heebo', sans-serif;
+    z-index: 100;
+  }
+
+  /* ======================================
+     SLIDE 1 — TITLE
+  ====================================== */
+  .slide-1 {
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(76,201,240,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 80% at 0% 100%, rgba(199,125,255,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 100% 80%, rgba(255,107,107,0.12) 0%, transparent 60%),
+      var(--navy);
+  }
+
+  .slide-1 .inner {
+    text-align: center;
+    padding: 40px;
+    max-width: 900px;
+  }
+
+  .slide-1 .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(76,201,240,0.12);
+    border: 1px solid rgba(76,201,240,0.3);
+    color: var(--sky);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 32px;
+    font-family: 'Heebo', sans-serif;
+    font-weight: 700;
+  }
+
+  .slide-1 h1 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-weight: 900;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+
+  .slide-1 h1 .accent {
+    background: linear-gradient(135deg, var(--sky), var(--lavender));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .slide-1 .subtitle {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+  }
+
+  .slide-1 .presenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .slide-1 .presenter strong {
+    color: var(--yellow);
+    font-weight: 700;
+  }
+
+  /* Floating orbs */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .orb-1 {
+    width: 400px; height: 400px;
+    background: rgba(76,201,240,0.08);
+    top: -100px; right: -100px;
+    animation-delay: 0s;
+  }
+
+  .orb-2 {
+    width: 300px; height: 300px;
+    background: rgba(199,125,255,0.1);
+    bottom: -80px; left: -80px;
+    animation-delay: 3s;
+  }
+
+  .orb-3 {
+    width: 200px; height: 200px;
+    background: rgba(255,209,102,0.08);
+    top: 50%; left: 10%;
+    animation-delay: 5s;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-20px) scale(1.05); }
+  }
+
+  /* Grid lines bg */
+  .grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  /* ======================================
+     SLIDE 2 — WHAT IS CLAUDE CODE
+  ====================================== */
+  .slide-2 {
+    background:
+      radial-gradient(ellipse 60% 40% at 100% 0%, rgba(0,201,167,0.12) 0%, transparent 60%),
+      var(--navy2);
+  }
+
+  .slide-2 .inner {
+    padding: 60px;
+    max-width: 1100px;
+    width: 100%;
+  }
+
+  .slide-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .slide-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(0,201,167,0.3);
+    max-width: 80px;
+  }
+
+  .slide-2 h2 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    margin-bottom: 48px;
+    line-height: 1.15;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .feature-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 28px;
+    transition: transform 0.3s, border-color 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 60px; height: 60px;
+    border-radius: 0 16px 0 60px;
+    background: var(--card-accent, rgba(0,201,167,0.1));
+  }
+
+  .feature-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255,255,255,0.16);
+  }
+
+  .feature-icon {
+    font-size: 2rem;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .feature-title {
+    font-family: 'Secular One', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: var(--white);
+  }
+
+  .feature-desc {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* Terminal decoration */
+  .terminal-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: var(--mint);
+    margin-bottom: 24px;
+  }
+
+  /* ======================================
+     SLIDE 3 — WHAT I BUILT
+  ====================================== */
+  .slide-3 {
+    background:
+      radial-gradient(ellipse 70% 50% at 20% 50%, rgba(255,209,102,0.1) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 80% 20%, rgba(255,107,107,0.08) 0%, transparent 60%),
+      var(--navy);
+  }
+
+  .slide-3 .inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    padding: 60px;
+    max-width: 1200px;
+    width: 100%;
+    align-items: center;
+  }
+
+  .slide-3 .text-col {}
+
+  .slide-3 h2 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 28px;
+  }
+
+  .shop-name {
+    font-family: 'Secular One', sans-serif;
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, var(--yellow), var(--coral));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  .slide-3 p {
+    color: var(--text-muted);
+    line-height: 1.8;
+    font-size: 1rem;
+    margin-bottom: 28px;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .tag {
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border: 1px solid;
+  }
+
+  .tag-yellow { background: rgba(255,209,102,0.12); border-color: rgba(255,209,102,0.3); color: var(--yellow); }
+  .tag-coral  { background: rgba(255,107,107,0.12); border-color: rgba(255,107,107,0.3); color: var(--coral); }
+  .tag-mint   { background: rgba(0,201,167,0.12);   border-color: rgba(0,201,167,0.3);   color: var(--mint); }
+  .tag-sky    { background: rgba(76,201,240,0.12);  border-color: rgba(76,201,240,0.3);  color: var(--sky); }
+
+  /* Mock browser */
+  .browser-mock {
+    background: #1c2333;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+  }
+
+  .browser-bar {
+    background: #252d3d;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .browser-dots { display: flex; gap: 6px; }
+  .browser-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+  }
+  .bd-r { background: #ff5f57; }
+  .bd-y { background: #ffbd2e; }
+  .bd-g { background: #28ca41; }
+
+  .browser-url {
+    flex: 1;
+    background: rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-family: 'Courier New', monospace;
+    text-align: center;
+  }
+
+  .browser-content {
+    padding: 28px;
+    min-height: 280px;
+    background: linear-gradient(160deg, #a8e4f0 0%, #fef9c3 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .shop-preview-title {
+    font-family: 'Secular One', sans-serif;
+    font-size: 2.2rem;
+    color: #0d3b5e;
+    text-shadow: 2px 2px 0 #d4530a;
+  }
+
+  .shop-preview-sub {
+    font-size: 0.9rem;
+    color: #2d6a7a;
+  }
+
+  .squish-row {
+    display: flex;
+    gap: 12px;
+    font-size: 2.5rem;
+  }
+
+  .wa-btn {
+    background: #25d366;
+    color: white;
+    padding: 10px 22px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    font-family: 'Heebo', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ======================================
+     SLIDE 4 — WHAT AMAZED ME
+  ====================================== */
+  .slide-4 {
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 100%, rgba(199,125,255,0.12) 0%, transparent 60%),
+      var(--navy2);
+  }
+
+  .slide-4 .inner {
+    padding: 60px;
+    max-width: 1100px;
+    width: 100%;
+  }
+
+  .slide-4 h2 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    margin-bottom: 48px;
+    line-height: 1.15;
+  }
+
+  .wow-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .wow-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px;
+    padding: 28px;
+    transition: transform 0.3s;
+  }
+
+  .wow-card:hover { transform: scale(1.02); }
+
+  .wow-num {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 1;
+    min-width: 60px;
+  }
+
+  .wow-card:nth-child(1) .wow-num { color: var(--coral); }
+  .wow-card:nth-child(2) .wow-num { color: var(--yellow); }
+  .wow-card:nth-child(3) .wow-num { color: var(--mint); }
+  .wow-card:nth-child(4) .wow-num { color: var(--lavender); }
+
+  .wow-text h3 {
+    font-family: 'Secular One', sans-serif;
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+  }
+
+  .wow-text p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ======================================
+     SLIDE 5 — WHAT I LEARNED
+  ====================================== */
+  .slide-5 {
+    background:
+      radial-gradient(ellipse 80% 70% at 50% 50%, rgba(76,201,240,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 0% 0%, rgba(0,201,167,0.1) 0%, transparent 50%),
+      var(--navy);
+  }
+
+  .slide-5 .inner {
+    text-align: center;
+    padding: 60px;
+    max-width: 900px;
+  }
+
+  .slide-5 h2 {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    font-weight: 900;
+    margin-bottom: 48px;
+    line-height: 1.15;
+  }
+
+  .learnings {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+
+  .learning-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    padding: 22px 28px;
+    text-align: right;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+
+  .learning-item:hover {
+    transform: translateX(-6px);
+    border-color: rgba(255,255,255,0.15);
+  }
+
+  .learning-icon {
+    font-size: 2rem;
+    min-width: 48px;
+    text-align: center;
+  }
+
+  .learning-text {
+    flex: 1;
+  }
+
+  .learning-text strong {
+    display: block;
+    font-family: 'Secular One', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+  }
+
+  .learning-text span {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  .closing-quote {
+    font-family: 'Frank Ruhl Libre', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    font-style: italic;
+    color: rgba(255,255,255,0.4);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 32px;
+    line-height: 1.6;
+  }
+
+  .closing-quote span {
+    color: var(--sky);
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  /* ===== ANIMATIONS ===== */
+  .slide.active .anim-item {
+    animation: slideUp 0.5s cubic-bezier(0.4,0,0.2,1) both;
+  }
+
+  .slide.active .anim-item:nth-child(1) { animation-delay: 0.1s; }
+  .slide.active .anim-item:nth-child(2) { animation-delay: 0.2s; }
+  .slide.active .anim-item:nth-child(3) { animation-delay: 0.3s; }
+  .slide.active .anim-item:nth-child(4) { animation-delay: 0.4s; }
+  .slide.active .anim-item:nth-child(5) { animation-delay: 0.5s; }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Anthropic logo text */
+  .anthropic-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: 12px;
+  }
+
+  .anthropic-tag .dot-live {
+    width: 8px; height: 8px;
+    background: var(--mint);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+</style>
+</head>
+<body>
+
+<div class="key-hint">← → לניווט בין שקפים</div>
+
+<div class="deck" id="deck">
+
+  <!-- ===== SLIDE 1: TITLE ===== -->
+  <div class="slide slide-1 active" data-index="0">
+    <div class="grid-bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="inner">
+      <div class="badge anim-item">🤖 &nbsp; Anthropic · 2024</div>
+      <h1 class="anim-item">
+        <span class="accent">Claude Code</span><br>מה זה ומה עשיתי איתו
+      </h1>
+      <p class="subtitle anim-item">
+        AI שכותב קוד, בונה אתרים, מבין עברית —<br>וגרם לי לבנות חנות אונליין בלי לדעת לתכנת
+      </p>
+      <div class="presenter anim-item">
+        <span>מוצג על ידי</span>
+        <strong>קרולין לוי זעירא</strong>
+        <span>·</span>
+        <span>יועצת לפיתוח ארגוני מערכתי</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 2: WHAT IS CLAUDE CODE ===== -->
+  <div class="slide slide-2" data-index="1">
+    <div class="inner">
+      <div class="slide-label anim-item">01 · הכלי</div>
+      <h2 class="anim-item">מה זה Claude Code?</h2>
+      <div class="terminal-tag anim-item">
+        <span style="color:#ff5f57">●</span>
+        <span style="color:#ffbd2e">●</span>
+        <span style="color:#28ca41">●</span>
+        &nbsp; ~ claude "בנה לי אתר לחנות סקווישים"
+      </div>
+      <div class="features-grid">
+        <div class="feature-card anim-item" style="--card-accent: rgba(76,201,240,0.12)">
+          <span class="feature-icon">🧠</span>
+          <div class="feature-title">AI מתקדם של Anthropic</div>
+          <div class="feature-desc">עובד ישירות מהטרמינל — מבין הוראות בשפה טבעית, בעברית, בדיוק כמו שיחה</div>
+        </div>
+        <div class="feature-card anim-item" style="--card-accent: rgba(0,201,167,0.12)">
+          <span class="feature-icon">📁</span>
+          <div class="feature-title">קורא, כותב ועורך קבצים</div>
+          <div class="feature-desc">יכול לקרוא את כל הקבצים בתיקייה, לכתוב קוד חדש, לערוך קיים — הכל אוטומטי</div>
+        </div>
+        <div class="feature-card anim-item" style="--card-accent: rgba(255,209,102,0.12)">
+          <span class="feature-icon">🌐</span>
+          <div class="feature-title">בונה אתרים שלמים</div>
+          <div class="feature-desc">מ-HTML ו-CSS ועד JavaScript מלא — אתר שלם, מעוצב, עם תמונות ולחצנים</div>
+        </div>
+        <div class="feature-card anim-item" style="--card-accent: rgba(199,125,255,0.12)">
+          <span class="feature-icon">⚡</span>
+          <div class="feature-title">מתכנן ומבצע משימות מורכבות</div>
+          <div class="feature-desc">שואל שאלות הבהרה, מציע פתרונות, מסביר מה הוא עושה — שותף אמיתי</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 3: WHAT I BUILT ===== -->
+  <div class="slide slide-3" data-index="2">
+    <div class="inner">
+      <div class="text-col">
+        <div class="slide-label anim-item">02 · הפרויקט</div>
+        <h2 class="anim-item">מה בניתי?</h2>
+        <span class="shop-name anim-item">🧸 הסקוושיה של גאיה</span>
+        <p class="anim-item">
+          חנות אונליין לסקווישים רכים ומתוקים — עיצוב צבעוני ושמח, תמונות מוצר, קטגוריות, ועמוד הזמנה ישירה בוואטסאפ.
+          <br><br>
+          כל זה — <strong>בלי לדעת לכתוב שורת קוד אחת.</strong>
+        </p>
+        <div class="tags anim-item">
+          <span class="tag tag-yellow">עיצוב צבעוני</span>
+          <span class="tag tag-coral">HTML + CSS</span>
+          <span class="tag tag-mint">תמונות מוצר</span>
+          <span class="tag tag-sky">הזמנה בוואטסאפ</span>
+        </div>
+      </div>
+      <div class="browser-mock anim-item">
+        <div class="browser-bar">
+          <div class="browser-dots">
+            <div class="browser-dot bd-r"></div>
+            <div class="browser-dot bd-y"></div>
+            <div class="browser-dot bd-g"></div>
+          </div>
+          <div class="browser-url">הסקוושיה-של-גאיה.html</div>
+        </div>
+        <div class="browser-content">
+          <div class="squish-row">🐰 🐼 🦆 🐱 🐸</div>
+          <div class="shop-preview-title">הסקוושיה של גאיה</div>
+          <div class="shop-preview-sub">סקוושים רכים ומתוקים במחירים משתלמים</div>
+          <div class="wa-btn">📱 הזמיני בוואטסאפ</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 4: WHAT AMAZED ME ===== -->
+  <div class="slide slide-4" data-index="3">
+    <div class="inner">
+      <div class="slide-label anim-item">03 · ההפתעה</div>
+      <h2 class="anim-item">מה הדהים אותי?</h2>
+      <div class="wow-grid">
+        <div class="wow-card anim-item">
+          <div class="wow-num">01</div>
+          <div class="wow-text">
+            <h3>מהירות בלתי נתפסת</h3>
+            <p>מה שהיה אמור לקחת שבועות — קרה בשעות. אתר שלם, עם עיצוב, בזמן קצר</p>
+          </div>
+        </div>
+        <div class="wow-card anim-item">
+          <div class="wow-num">02</div>
+          <div class="wow-text">
+            <h3>משהו שלם מאפס</h3>
+            <p>לא תבנית, לא template — אתר ייחודי שנבנה בדיוק לפי מה שביקשתי</p>
+          </div>
+        </div>
+        <div class="wow-card anim-item">
+          <div class="wow-num">03</div>
+          <div class="wow-text">
+            <h3>שיחה בעברית טבעית</h3>
+            <p>לא הייתי צריכה ללמוד שפה מיוחדת — דיברתי בעברית רגילה, וזה הבין</p>
+          </div>
+        </div>
+        <div class="wow-card anim-item">
+          <div class="wow-num">04</div>
+          <div class="wow-text">
+            <h3>אפס ידע קודים נדרש</h3>
+            <p>לא ידעתי HTML, לא ידעתי CSS — ולא היה צריך. הכלי ידע במקומי</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SLIDE 5: WHAT I LEARNED ===== -->
+  <div class="slide slide-5" data-index="4">
+    <div class="orb orb-1"></div>
+    <div class="inner">
+      <div class="slide-label anim-item" style="justify-content:center; text-align:center">04 · הלקח</div>
+      <h2 class="anim-item">מה למדתי?</h2>
+      <div class="learnings">
+        <div class="learning-item anim-item">
+          <div class="learning-icon">🔧</div>
+          <div class="learning-text">
+            <strong>אפשר לבנות כל דבר עם הכלי הנכון</strong>
+            <span>המגבלה היא לא הידע הטכני — היא היצירתיות והרצון</span>
+          </div>
+        </div>
+        <div class="learning-item anim-item">
+          <div class="learning-icon">🤝</div>
+          <div class="learning-text">
+            <strong>AI הוא שותף יצירתי, לא רק כלי</strong>
+            <span>הוא שואל, מציע, מסביר — זו שיחה אמיתית לכל דבר</span>
+          </div>
+        </div>
+        <div class="learning-item anim-item">
+          <div class="learning-icon">🌈</div>
+          <div class="learning-text">
+            <strong>הדמיון הוא הגבול</strong>
+            <span>כל רעיון שאפשר לתאר במילים — אפשר גם לממש אותו</span>
+          </div>
+        </div>
+      </div>
+      <div class="closing-quote anim-item">
+        "לא לקח לי זמן ללמוד לתכנת —<br>
+        לקח לי זמן <span>להאמין שאני יכולה</span>"
+      </div>
+    </div>
+  </div>
+
+</div><!-- /deck -->
+
+<!-- NAVIGATION -->
+<div class="nav">
+  <button class="nav-btn" id="prevBtn" onclick="navigate(-1)">←</button>
+  <div class="dots" id="dots"></div>
+  <span class="slide-counter" id="counter">1 / 5</span>
+  <button class="nav-btn" id="nextBtn" onclick="navigate(1)">→</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const dotsContainer = document.getElementById('dots');
+  const counter = document.getElementById('counter');
+  let current = 0;
+  const total = slides.length;
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotsContainer.appendChild(d);
+  });
+
+  function goTo(index) {
+    if (index < 0 || index >= total) return;
+    slides[current].classList.remove('active');
+    slides[current].classList.add('out');
+    setTimeout(() => slides[current].classList.remove('out'), 600);
+
+    current = index;
+    slides[current].classList.add('active');
+
+    // Reset animations by re-triggering
+    slides[current].querySelectorAll('.anim-item').forEach(el => {
+      el.style.animation = 'none';
+      el.offsetHeight; // reflow
+      el.style.animation = '';
+    });
+
+    // Update dots
+    document.querySelectorAll('.dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+
+    counter.textContent = `${current + 1} / ${total}`;
+  }
+
+  function navigate(dir) {
+    goTo(current + dir);
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') navigate(1);
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp') navigate(-1);
+  });
+
+  // Touch/swipe
+  let touchStartX = 0;
+  document.addEventListener('touchstart', e => touchStartX = e.touches[0].clientX);
+  document.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) navigate(diff > 0 ? 1 : -1);
+  });
+</script>
+</body>
+</html>
