@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8">
@@ -950,51 +950,68 @@
 
     /* ===== קטגוריות ===== */
     .categories-section {
-      background: linear-gradient(180deg, #fff5fb, #ffeeff);
-      padding: 36px 20px 40px;
+      background: #fafafa;
+      padding: 36px 16px 44px;
+    }
+    .categories-section > h2 {
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #222;
+      margin-bottom: 6px;
+    }
+    .categories-section > p {
+      text-align: center;
+      color: #999;
+      font-size: 0.9rem;
+      margin-bottom: 24px;
     }
     .categories-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
-      gap: 16px;
-      max-width: 800px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      max-width: 860px;
       margin: 0 auto;
     }
+    @media (max-width: 500px) {
+      .categories-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    }
     .category-card {
-      border-radius: 20px;
+      border-radius: 14px;
       overflow: hidden;
       cursor: pointer;
-      box-shadow: 0 5px 16px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.09);
       transition: transform 0.18s, box-shadow 0.18s;
       background: white;
       border: 3px solid transparent;
     }
-    .category-card:hover { transform: translateY(-5px); box-shadow: 0 10px 24px rgba(0,0,0,0.15); }
-    .category-card.active { border-color: #ff6b1a; }
-    .category-card img { width: 100%; height: 150px; object-fit: cover; }
+    .category-card:hover { transform: translateY(-4px); box-shadow: 0 8px 22px rgba(0,0,0,0.14); }
+    .category-card.active { border-color: #ff6b1a; box-shadow: 0 0 0 3px rgba(255,107,26,0.18); }
+    .category-card img { width: 100%; height: 160px; object-fit: cover; display: block; }
     .cat-no-img {
-      width: 100%; height: 150px;
+      width: 100%; height: 160px;
       display: flex; align-items: center; justify-content: center;
       font-size: 3.5rem;
-      background: linear-gradient(135deg, #e8d5ff, #d5e8ff);
     }
     .category-card-name {
       text-align: center;
-      font-weight: 900;
+      font-weight: 700;
       font-size: 1rem;
-      color: #333;
-      padding: 12px 8px;
+      color: #222;
+      padding: 11px 8px 12px;
+      background: white;
     }
-    .cat-filter-bar { text-align: center; margin-top: 18px; }
+    .cat-filter-bar { text-align: center; margin-top: 20px; }
     .cat-clear-btn {
-      background: none;
-      border: 2px solid #ccc;
-      border-radius: 20px;
-      padding: 7px 20px;
-      font-size: 0.87rem;
+      background: white;
+      border: 2px solid #ddd;
+      border-radius: 24px;
+      padding: 8px 24px;
+      font-size: 0.88rem;
       cursor: pointer;
-      color: #888;
+      color: #777;
       transition: border-color 0.15s, color 0.15s;
+      font-family: inherit;
     }
     .cat-clear-btn:hover { border-color: #ff6b1a; color: #ff6b1a; }
 
@@ -1155,6 +1172,38 @@
       width: 100%;
       text-align: center;
     }
+
+    /* ===== ניווט הדר ===== */
+    .header-nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+    .header-nav-btn {
+      background: rgba(255,255,255,0.22);
+      border: 2px solid rgba(255,255,255,0.65);
+      border-radius: 24px;
+      color: white;
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 7px 16px;
+      cursor: pointer;
+      font-family: 'Rubik', 'Segoe UI', Arial, sans-serif;
+      transition: background 0.18s, transform 0.15s;
+    }
+    .header-nav-btn:hover { background: rgba(255,255,255,0.4); transform: translateY(-2px); }
+
+    /* ===== אנימציית הוספה לעגלה ===== */
+    @keyframes cart-flash {
+      0%   { background: #fffde7; }
+      40%  { background: #fff176; box-shadow: inset 0 0 0 2px #fdd835; }
+      100% { background: transparent; box-shadow: none; }
+    }
+    .cart-item-new { animation: cart-flash 1.5s ease forwards; border-radius: 8px; }
   </style>
 </head>
 <body>
@@ -1255,6 +1304,11 @@
   </div>
   <h1>🌸 הסקוושיה של גאיה 🌸</h1>
   <p>סקוושים רכים ומתוקים — לחצו להזמנה!</p>
+  <div class="header-nav">
+    <button class="header-nav-btn" onclick="document.getElementById('categories').scrollIntoView({behavior:'smooth'})">🗂️ קטגוריות</button>
+    <button class="header-nav-btn" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">🛍️ מוצרים</button>
+    <button class="header-nav-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">📞 צור קשר</button>
+  </div>
 </header>
 
 <div class="shipping-bar">
@@ -1275,490 +1329,9 @@
 
 <div class="grass-divider-wrap"><div class="grass-divider"></div></div>
 
-<div class="products-area" id="shop">
-
-  <div class="featured-section">
-    <span class="featured-label">⭐ מוצר השבוע</span>
-    <img class="featured-img" src="ברווז מפריח בועה.jpg" alt="ברווז מפריח בועה" onclick="openZoom(this)" style="object-fit:contain;background:#f9f9f9;">
-    <div class="featured-info">
-      <h3>ברווז מפריח בועה</h3>
-      <div class="featured-price">6 ש"ח</div>
-      <p>הברווז הכי חמוד! 🫧<br>זמין בצבעים ורוד וצהוב</p>
-      <button class="order-btn" onclick="scrollToProduct('ברווז מפריח בועה')" style="font-size:0.82rem;padding:8px 18px;animation:none">👇 לחצי לפרטים</button>
-    </div>
-  </div>
-
-  <div class="section-title">🛍️ המוצרים שלנו</div>
-  <div class="search-wrap">
-    <input type="text" id="searchInput" class="search-input" placeholder="🔍 חפשי מוצר..." oninput="searchProducts(this.value)">
-  </div>
-  <div class="sort-bar">
-    <button class="sort-btn active" onclick="sortProducts('all',this)">הכל</button>
-    <button class="sort-btn" onclick="sortProducts('low',this)">💰 מהזול ליקר</button>
-    <button class="sort-btn" onclick="sortProducts('high',this)">💎 מהיקר לזול</button>
-    <button class="sort-btn" onclick="sortProducts('name',this)">א-ב לפי שם</button>
-  </div>
-  <div class="products">
-
-    <div class="card">
-      <img src="אפון נידו בשלושה צבעים.jpg" alt="אפון נידו בשלושה צבעים">
-      <div class="card-body">
-        <h2>אפון נידו בשלושה צבעים</h2>
-        <div class="price">4 ש"ח</div>
-        <div class="color-chips">
-          <span class="color-chip" style="background:#00bfb3;opacity:0.45;text-decoration:line-through;cursor:default" title="אזל מהמלאי">טורקיז</span>
-          <span class="color-chip" style="background:#e6b800;opacity:0.45;text-decoration:line-through;cursor:default" title="אזל מהמלאי">צהוב</span>
-          <span class="color-chip" style="background:#ff69b4" data-color="ורוד" onclick="selectColor(this)">ורוד</span>
-        </div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין אפון נידו" target="_blank" data-base="אפון נידו">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="אקסולטל קרח בשלושה צבעים.jpg" alt="אקסולטל קרח">
-      <div class="card-body">
-        <h2>אקסולטל קרח בשלושה צבעים</h2>
-        <div class="price">6 ש"ח</div>
-        <div class="color-chips">
-          <span class="color-chip" style="background:#e6b800" data-color="צהוב" onclick="selectColor(this)">צהוב</span>
-        </div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין אקסולטל קרח" target="_blank" data-base="אקסולטל קרח">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="ארנב מוציא עיניים.jpg" alt="ארנב מוציא עיניים">
-      <div class="card-body">
-        <h2>ארנב מוציא עיניים</h2>
-        <div class="price">6 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין ארנב מוציא עיניים" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="ארנב נידו.jpg" alt="ארנב נידו">
-      <div class="card-body">
-        <h2>ארנב נידו</h2>
-        <div class="price">6 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין ארנב נידו" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="ארנבה נידו גזר בשני צבעים.jpg" alt="ארנבה נידו גזר">
-      <div class="card-body">
-        <h2>ארנבה נידו גזר בשני צבעים</h2>
-        <div class="price">6 ש"ח</div>
-        <div class="color-chips">
-          <span class="color-chip" style="background:#e6b800" data-color="צהוב" onclick="selectColor(this)">צהוב</span>
-          <span class="color-chip" style="background:#00bfb3" data-color="טורקיז" onclick="selectColor(this)">טורקיז</span>
-        </div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין ארנבה נידו גזר" target="_blank" data-base="ארנבה נידו גזר">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="ביצת מיים סגולה.jpg" alt="ביצת מיים סגולה">
-      <div class="card-body">
-        <h2>ביצת מיים סגולה</h2>
-        <div class="price">5 ש"ח</div>
-        <div class="color-note">⚡ אחרון במלאי!</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין ביצת מיים סגולה" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="ביצת מיים.jpg" alt="ביצת מיים">
-      <div class="card-body">
-        <h2>ביצת מיים</h2>
-        <div class="price">3 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין ביצת מיים" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="ביצת קרח סגולה.jpg" alt="ביצת קרח סגולה">
-      <div class="card-body">
-        <h2>ביצת קרח סגולה</h2>
-        <div class="price">5 ש"ח</div>
-        <div class="color-note">⚡ אחרון במלאי!</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין ביצת קרח סגולה" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="דג קרח.jpg" alt="דג קרח">
-      <div class="card-body">
-        <h2>דג קרח</h2>
-        <div class="price">6 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין דג קרח" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="דמות נידו.jpg" alt="דמות נידו">
-      <div class="card-body">
-        <h2>דמות נידו</h2>
-        <div class="price">5 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין דמות נידו" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="חללית נידו בשני צבעים.jpg" alt="חללית נידו">
-      <div class="card-body">
-        <h2>חללית נידו בשני צבעים</h2>
-        <div class="price">5 ש"ח</div>
-        <div class="color-chips">
-          <span class="color-chip" style="background:#e6b800;opacity:0.45;text-decoration:line-through;cursor:default" title="אזל מהמלאי">צהוב</span>
-          <span class="color-chip" style="background:#00bfb3;opacity:0.45;text-decoration:line-through;cursor:default" title="אזל מהמלאי">טורקיז</span>
-          <span class="color-chip" style="background:#4caf50" data-color="ירוק" onclick="selectColor(this)">ירוק</span>
-        </div>
-        <div class="color-note">⚡ אחרון במלאי — ירוק בלבד!</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין חללית נידו ירוק" target="_blank" data-base="חללית נידו">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="חמור סגול מוציא עיניים.jpg" alt="חמור סגול מוציא עיניים">
-      <div class="card-body">
-        <h2>חמור סגול מוציא עיניים</h2>
-        <div class="price">6 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין חמור סגול מוציא עיניים" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="חתול ורוד מוציא עיניים.jpg" alt="חתול ורוד מוציא עיניים">
-      <div class="card-body">
-        <h2>חתול ורוד מוציא עיניים</h2>
-        <div class="price">6 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין חתול ורוד מוציא עיניים" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="חתול צהוב מוציא עיניים.jpg" alt="חתול צהוב מוציא עיניים">
-      <div class="card-body">
-        <h2>חתול צהוב מוציא עיניים</h2>
-        <div class="price">6 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין חתול צהוב מוציא עיניים" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="כלב סגול מוציא עיניים.jpg" alt="כלב כחול מוציא עיניים">
-      <div class="card-body">
-        <h2>כלב כחול מוציא עיניים</h2>
-        <div class="price">6 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין כלב כחול מוציא עיניים" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="כלב שוכב מוציא עיניים חום.jpg" alt="כלב שוכב מוציא עיניים חום">
-      <div class="card-body">
-        <h2>כלב שוכב מוציא עיניים חום</h2>
-        <div class="price">6 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין כלב שוכב מוציא עיניים חום" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="לב נידו מיים.jpg" alt="לב נידו מיים">
-      <div class="card-body">
-        <h2>לב נידו מיים</h2>
-        <div class="price">5 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין לב נידו מיים" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="מקרון נידו בשני צבעים.jpg" alt="מקרון נידו">
-      <div class="card-body">
-        <h2>מקרון נידו בשני צבעים</h2>
-        <div class="price">4 ש"ח</div>
-        <div class="color-chips">
-          <span class="color-chip" style="background:#ff7a1a;opacity:0.45;text-decoration:line-through;cursor:default" title="אזל מהמלאי">כתום</span>
-          <span class="color-chip" style="background:#ff69b4" data-color="ורוד" onclick="selectColor(this)">ורוד</span>
-        </div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין מקרון נידו ורוד" target="_blank" data-base="מקרון נידו">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="סנטה נידו.jpg" alt="סנטה נידו">
-      <div class="card-body">
-        <h2>סנטה נידו</h2>
-        <div class="price">4 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין סנטה נידו" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="פופ אפ.jpg" alt="פופ אפ">
-      <div class="card-body">
-        <h2>פופ אפ</h2>
-        <div class="price">3 ש"ח</div>
-        <div class="color-note">🎨 זמין במגוון צבעים — ציינו בהזמנה!</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין פופ אפ (צבע: )" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="פנדה נידו בשני צבעים.jpg" alt="פנדה נידו">
-      <div class="card-body">
-        <h2>פנדה נידו בשני צבעים</h2>
-        <div class="price">6 ש"ח</div>
-        <div class="color-chips">
-          <span class="color-chip" style="background:#00bfb3" data-color="טורקיז" onclick="selectColor(this)">טורקיז</span>
-          <span class="color-chip" style="background:#ff69b4" data-color="ורוד" onclick="selectColor(this)">ורוד</span>
-        </div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין פנדה נידו" target="_blank" data-base="פנדה נידו">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="שייק נידו עם דמות קוריאנית.jpg" alt="שייק נידו">
-      <div class="card-body">
-        <h2>שייק נידו עם דמות קוריאנית</h2>
-        <div class="price">4 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין שייק נידו עם דמות קוריאנית" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="תרנגול נידו.jpg" alt="תרנגול נידו">
-      <div class="card-body">
-        <h2>תרנגול נידו</h2>
-        <div class="price">6 ש"ח</div>
-        <div class="color-note">☀️ משנה צבע לורוד בשמש!</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין תרנגול נידו" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="מניון מיים.jpg" alt="מיניון מיים">
-      <div class="card-body">
-        <h2>מיניון מיים</h2>
-        <div class="price">5 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין מיניון מיים" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="חתול לבן מוציא עיניים.jpeg" alt="חתול לבן מוציא עיניים">
-      <div class="card-body">
-        <h2>חתול לבן מוציא עיניים</h2>
-        <div class="price">6 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין חתול לבן מוציא עיניים" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="חתול אורביז.jpg" alt="חתול אורביז">
-      <div class="card-body">
-        <h2>חתול אורביז</h2>
-        <div class="price">5 ש"ח</div>
-        <div class="color-note">⚡ חזר למלאי — אחרון!</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין חתול אורביז" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="פנדה נידו כתומה.jpeg" alt="פנדה נידו כתומה">
-      <div class="card-body">
-        <h2>פנדה נידו כתומה</h2>
-        <div class="price">6 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין פנדה נידו כתומה" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="ברווז מיים.jpg" alt="ברווז מיים">
-      <div class="card-body">
-        <h2>ברווז מיים</h2>
-        <div class="price">5 ש"ח</div>
-        <div class="color-note">⚡ אחרון במלאי!</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין ברווז מיים" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="ברווז מפריח בועה.jpg" alt="ברווז מפריח בועה" style="object-fit:contain;background:#f9f9f9;">
-      <div class="card-body">
-        <h2>ברווז מפריח בועה</h2>
-        <div class="price">6 ש"ח</div>
-        <div class="color-chips">
-          <span class="color-chip" style="background:#e6b800" data-color="צהוב" onclick="selectColor(this)">צהוב</span>
-          <span class="color-chip" style="background:#ff69b4" data-color="ורוד" onclick="selectColor(this)">ורוד</span>
-        </div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין ברווז מפריח בועה" target="_blank" data-base="ברווז מפריח בועה">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="תות מיים.jpg" alt="תות מיים">
-      <div class="card-body">
-        <h2>תות מיים</h2>
-        <div class="price">5 ש"ח</div>
-        <div class="color-note">⚡ אחרון במלאי!</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין תות מיים" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card" style="opacity:0.6;filter:grayscale(0.5)">
-      <img src="בננה קרח.jpg" alt="בננה קרח">
-      <div class="card-body">
-        <h2>בננה קרח</h2>
-        <div class="price">5 ש"ח</div>
-        <div class="color-note" style="color:#cc0000">😢 אזל מהמלאי</div>
-        <button class="order-btn" disabled style="opacity:0.4;cursor:not-allowed;animation:none">אזל מהמלאי</button>
-      </div>
-    </div>
-
-    <div class="card" style="opacity:0.6;filter:grayscale(0.5)">
-      <img src="עכבר מיים שחור.jpg" alt="עכבר מיים שחור">
-      <div class="card-body">
-        <h2>עכבר מיים שחור</h2>
-        <div class="price">5 ש"ח</div>
-        <div class="color-note" style="color:#cc0000">😢 אזל מהמלאי</div>
-        <button class="order-btn" disabled style="opacity:0.4;cursor:not-allowed;animation:none">אזל מהמלאי</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="חיפושית נידו סגולה.jpg" alt="חיפושית נידו סגולה">
-      <div class="card-body">
-        <h2>חיפושית נידו סגולה</h2>
-        <div class="price">6 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין חיפושית נידו סגולה" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="דרגון פרוט נידו.jpg" alt="דרגון פרוט נידו">
-      <div class="card-body">
-        <h2>דרגון פרוט נידו</h2>
-        <div class="price">6 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין דרגון פרוט נידו" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="פופ אפ קקטוס.jpg" alt="פופ אפ קקטוס">
-      <div class="card-body">
-        <h2>פופ אפ קקטוס</h2>
-        <div class="price">3 ש"ח</div>
-        <div class="color-chips">
-          <span class="color-chip" style="background:#40c4ff" data-color="תכלת" onclick="selectColor(this)">תכלת</span>
-          <span class="color-chip" style="background:#4caf50;opacity:0.45;text-decoration:line-through;cursor:default" title="אזל מהמלאי">ירוק</span>
-        </div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין פופ אפ קקטוס" target="_blank" data-base="פופ אפ קקטוס">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="פופ אפ קקטוס 1.jpeg" alt="פופ אפ קקטוס">
-      <div class="card-body">
-        <h2>פופ אפ קקטוס</h2>
-        <div class="price">3 ש"ח</div>
-        <div class="color-chips">
-          <span class="color-chip" style="background:#e6b800" data-color="צהוב" onclick="selectColor(this)">צהוב</span>
-          <span class="color-chip" style="background:#ff69b4" data-color="ורוד" onclick="selectColor(this)">ורוד</span>
-        </div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין פופ אפ קקטוס" target="_blank" data-base="פופ אפ קקטוס">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="פופ אפ קלמנטינה.jpg" alt="פופ אפ קלמנטינה">
-      <div class="card-body">
-        <h2>פופ אפ קלמנטינה</h2>
-        <div class="price">3 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין פופ אפ קלמנטינה" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="פופ אפ אגס.jpg" alt="פופ אפ אגס">
-      <div class="card-body">
-        <h2>פופ אפ אגס</h2>
-        <div class="price">3 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין פופ אפ אגס" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="פופ אפ אננס.jpg" alt="פופ אפ אננס">
-      <div class="card-body">
-        <h2>פופ אפ אננס</h2>
-        <div class="price">3 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין פופ אפ אננס" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="פופ אפ עכבר יוצא מגבינה.jpg" alt="פופ אפ עכבר יוצא מגבינה">
-      <div class="card-body">
-        <h2>פופ אפ עכבר יוצא מגבינה</h2>
-        <div class="price">3 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין פופ אפ עכבר יוצא מגבינה" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="כלב מוציא עיניים.jpg" alt="כלב מוציא עיניים">
-      <div class="card-body">
-        <h2>כלב מוציא עיניים</h2>
-        <div class="price">6 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין כלב מוציא עיניים" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="המבורגר נידו.jpg" alt="המבורגר נידו">
-      <div class="card-body">
-        <h2>המבורגר נידו</h2>
-        <div class="price">7 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין המבורגר נידו" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="מפלצת בעמ צהובה.jpg" alt="מפלצת בעמ נידו צהובה">
-      <div class="card-body">
-        <h2>מפלצת בעמ נידו צהובה</h2>
-        <div class="price">6 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין מפלצת בעמ נידו צהובה" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="מפלצת בעמ מוציאה עין.jpg" alt="מפלצת בעמ מוציאה עין">
-      <div class="card-body">
-        <h2>מפלצת בעמ מוציאה עין</h2>
-        <div class="price">6 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין מפלצת בעמ מוציאה עין" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="עגבניה מיני נידו.jpg" alt="עגבניה מיני נידו">
-      <div class="card-body">
-        <h2>עגבניה מיני נידו</h2>
-        <div class="price">2 ש"ח</div>
-        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין עגבניה מיני נידו" target="_blank">🛒 להזמנה בוואטסאפ</a>
-      </div>
-    </div>
-
-    <div class="search-empty" id="searchEmpty">לא נמצאו מוצרים 🌿</div>
-  </div>
-</div>
-
 <section class="categories-section" id="categories">
-  <h2 style="text-align:center;font-size:1.6rem;font-weight:900;color:#c44900;padding:0 0 6px;margin-bottom:4px;">🗂️ קטגוריות</h2>
-  <p style="text-align:center;color:#888;font-size:0.88rem;margin-bottom:22px;">בחרי קטגוריה לסינון המוצרים</p>
+  <h2>🗂️ קטגוריות</h2>
+  <p>בחרי קטגוריה לסינון המוצרים</p>
   <div class="categories-grid" id="categoriesGrid"></div>
   <div class="cat-filter-bar">
     <button class="cat-clear-btn" id="catClearBtn" style="display:none" onclick="clearCatFilter()">✕ הצג את כל המוצרים</button>
@@ -1773,6 +1346,501 @@
     </div>
   </div>
 </section>
+
+<div class="products-area" id="shop">
+
+  <div class="featured-section">
+    <span class="featured-label">⭐ מוצר השבוע</span>
+    <img class="featured-img" src="נידו/בובספוג נידו.jpg" alt="בובספוג נידו" onclick="openZoom(this)" style="object-fit:contain;background:#f9f9f9;">
+    <div class="featured-info">
+      <h3>בובספוג נידו</h3>
+      <div class="featured-price">10 ש"ח</div>
+      <p>בובספוג חמוד ורך! 🧽<br>הנידו הכי מצחיק בחנות</p>
+      <button class="order-btn" onclick="addFeaturedToCart(this)" style="font-size:0.82rem;padding:8px 18px;animation:none">🛒 הוסף לעגלה</button>
+      <button class="order-btn" onclick="scrollToProduct('בובספוג נידו')" style="font-size:0.82rem;padding:8px 18px;animation:none;background:none;border:2px solid #5cb85c;color:#3a8a3a;box-shadow:none;margin-top:6px;">👇 לפרטים</button>
+    </div>
+  </div>
+
+  <div class="section-title">🛍️ המוצרים שלנו</div>
+  <div class="search-wrap">
+    <input type="text" id="searchInput" class="search-input" placeholder="🔍 חפשי מוצר..." oninput="searchProducts(this.value)">
+  </div>
+  <div class="sort-bar">
+    <button class="sort-btn active" onclick="sortProducts('all',this)">הכל</button>
+    <button class="sort-btn" onclick="sortProducts('new',this)">✨ חדש קודם</button>
+    <button class="sort-btn" onclick="sortProducts('low',this)">💰 מהזול ליקר</button>
+    <button class="sort-btn" onclick="sortProducts('high',this)">💎 מהיקר לזול</button>
+    <button class="sort-btn" onclick="sortProducts('name',this)">א-ב לפי שם</button>
+  </div>
+  <div class="products">
+
+    
+    <div class="card">
+      <img src="נידו/בובספוג נידו.jpg" alt="בובספוג נידו">
+      <div class="card-body">
+        <h2>בובספוג נידו</h2>
+        <div class="price">10 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין בובספוג נידו" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="נידו/קוראסון נידו.jpg" alt="קוראסון נידו">
+      <div class="card-body">
+        <h2>קוראסון נידו</h2>
+        <div class="price">10 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין קוראסון נידו" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="מפריח בועה/חילזון מפריח בועה.jpg" alt="חילזון מפריח בועה">
+      <div class="card-body">
+        <h2>חילזון מפריח בועה</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין חילזון מפריח בועה" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="נידו/גזר נידו.jpg" alt="גזר נידו">
+      <div class="card-body">
+        <h2>גזר נידו</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין גזר נידו" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="מוציא עיניים/כריש מוציא עין.jpg" alt="כריש מוציא עין">
+      <div class="card-body">
+        <h2>כריש מוציא עין</h2>
+        <div class="price">4 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין כריש מוציא עין" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="קרח/תרנגול קרח מחליף צבע בשמש לורוד.jpg" alt="תרנגול קרח">
+      <div class="card-body">
+        <h2>תרנגול קרח</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין תרנגול קרח" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="נידו/בננה מיני נידו.jpg" alt="בננה מיני נידו">
+      <div class="card-body">
+        <h2>בננה מיני נידו</h2>
+        <div class="price">5 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין בננה מיני נידו" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="נידו/לחם נידו ירוק.jpg" alt="לחם נידו ירוק">
+      <div class="card-body">
+        <h2>לחם נידו ירוק</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין לחם נידו ירוק" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="נידו/אווז נידו לבן.jpg" alt="אווז נידו">
+      <div class="card-body">
+        <h2>אווז נידו</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין אווז נידו" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="קרח/ענבים קרח.jpg" alt="ענבים קרח">
+      <div class="card-body">
+        <h2>ענבים קרח</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין ענבים קרח" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="קרח/כלב קרח.jpg" alt="כלב קרח">
+      <div class="card-body">
+        <h2>כלב קרח</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין כלב קרח" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="נידו/שלט נינטדו כתום.jpg" alt="שלט נידו נינטנדו כתום">
+      <div class="card-body">
+        <h2>שלט נידו נינטנדו כתום</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין שלט נידו נינטנדו כתום" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="נידו/אפון נידו בשלושה צבעים.jpg" alt="אפון נידו בשלושה צבעים">
+      <div class="card-body">
+        <h2>אפון נידו בשלושה צבעים</h2>
+        <div class="price">4 ש"ח</div>
+        <div class="color-chips">
+          <span class="color-chip" style="background:#00bfb3;opacity:0.45;text-decoration:line-through;cursor:default" title="אזל מהמלאי">טורקיז</span>
+          <span class="color-chip" style="background:#e6b800;opacity:0.45;text-decoration:line-through;cursor:default" title="אזל מהמלאי">צהוב</span>
+          <span class="color-chip" style="background:#ff69b4" data-color="ורוד" onclick="selectColor(this)">ורוד</span>
+        </div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין אפון נידו" target="_blank" data-base="אפון נידו">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="קרח/אקסולטל קרח בשלושה צבעים.jpg" alt="אקסולטל קרח">
+      <div class="card-body">
+        <h2>אקסולטל קרח בשלושה צבעים</h2>
+        <div class="price">6 ש"ח</div>
+        <div class="color-chips">
+          <span class="color-chip" style="background:#e6b800" data-color="צהוב" onclick="selectColor(this)">צהוב</span>
+        </div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין אקסולטל קרח" target="_blank" data-base="אקסולטל קרח">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="מוציא עיניים/ארנב מוציא עיניים.jpg" alt="ארנב מוציא עיניים">
+      <div class="card-body">
+        <h2>ארנב מוציא עיניים</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין ארנב מוציא עיניים" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+
+    <div class="card">
+      <img src="נידו/ארנבה נידו גזר בשני צבעים.jpg" alt="ארנבה נידו גזר">
+      <div class="card-body">
+        <h2>ארנבה נידו גזר בשני צבעים</h2>
+        <div class="price">6 ש"ח</div>
+        <div class="color-chips">
+          <span class="color-chip" style="background:#e6b800" data-color="צהוב" onclick="selectColor(this)">צהוב</span>
+          <span class="color-chip" style="background:#00bfb3" data-color="טורקיז" onclick="selectColor(this)">טורקיז</span>
+        </div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין ארנבה נידו גזר" target="_blank" data-base="ארנבה נידו גזר">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="מיים/ביצת מיים סגולה.jpg" alt="ביצת מיים סגולה">
+      <div class="card-body">
+        <h2>ביצת מיים סגולה</h2>
+        <div class="price">5 ש"ח</div>
+        <div class="color-note">⚡ אחרון במלאי!</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין ביצת מיים סגולה" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="מיים/ביצת מיים.jpg" alt="ביצת מיים">
+      <div class="card-body">
+        <h2>ביצת מיים</h2>
+        <div class="price">3 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין ביצת מיים" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="קרח/ביצת קרח סגולה.jpg" alt="ביצת קרח סגולה">
+      <div class="card-body">
+        <h2>ביצת קרח סגולה</h2>
+        <div class="price">5 ש"ח</div>
+        <div class="color-note">⚡ אחרון במלאי!</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין ביצת קרח סגולה" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+
+    <div class="card">
+      <img src="נידו/חללית נידו בשני צבעים.jpg" alt="חללית נידו">
+      <div class="card-body">
+        <h2>חללית נידו בשני צבעים</h2>
+        <div class="price">5 ש"ח</div>
+        <div class="color-chips">
+          <span class="color-chip" style="background:#e6b800;opacity:0.45;text-decoration:line-through;cursor:default" title="אזל מהמלאי">צהוב</span>
+          <span class="color-chip" style="background:#00bfb3;opacity:0.45;text-decoration:line-through;cursor:default" title="אזל מהמלאי">טורקיז</span>
+          <span class="color-chip" style="background:#4caf50" data-color="ירוק" onclick="selectColor(this)">ירוק</span>
+        </div>
+        <div class="color-note">⚡ אחרון במלאי — ירוק בלבד!</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין חללית נידו ירוק" target="_blank" data-base="חללית נידו">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="מוציא עיניים/חמור סגול מוציא עיניים.jpg" alt="חמור סגול מוציא עיניים">
+      <div class="card-body">
+        <h2>חמור סגול מוציא עיניים</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין חמור סגול מוציא עיניים" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="מוציא עיניים/חתול ורוד מוציא עיניים.jpg" alt="חתול ורוד מוציא עיניים">
+      <div class="card-body">
+        <h2>חתול ורוד מוציא עיניים</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין חתול ורוד מוציא עיניים" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="מוציא עיניים/חתול צהוב מוציא עיניים.jpg" alt="חתול צהוב מוציא עיניים">
+      <div class="card-body">
+        <h2>חתול צהוב מוציא עיניים</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין חתול צהוב מוציא עיניים" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+
+    <div class="card">
+      <img src="מוציא עיניים/כלב שוכב מוציא עיניים חום.jpg" alt="כלב שוכב מוציא עיניים חום">
+      <div class="card-body">
+        <h2>כלב שוכב מוציא עיניים חום</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין כלב שוכב מוציא עיניים חום" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+
+    <div class="card">
+      <img src="נידו/מקרון נידו בשני צבעים.jpg" alt="מקרון נידו">
+      <div class="card-body">
+        <h2>מקרון נידו בשני צבעים</h2>
+        <div class="price">4 ש"ח</div>
+        <div class="color-chips">
+          <span class="color-chip" style="background:#ff7a1a;opacity:0.45;text-decoration:line-through;cursor:default" title="אזל מהמלאי">כתום</span>
+          <span class="color-chip" style="background:#ff69b4" data-color="ורוד" onclick="selectColor(this)">ורוד</span>
+        </div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין מקרון נידו ורוד" target="_blank" data-base="מקרון נידו">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+
+    <div class="card">
+      <img src="פופ אפ/פופ אפ.jpg" alt="פופ אפ">
+      <div class="card-body">
+        <h2>פופ אפ</h2>
+        <div class="price">3 ש"ח</div>
+        <div class="color-note">🎨 זמין במגוון צבעים — ציינו בהזמנה!</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין פופ אפ (צבע: )" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+
+    <div class="card">
+      <img src="נידו/שייק נידו עם דמות קוריאנית.jpg" alt="שייק נידו">
+      <div class="card-body">
+        <h2>שייק נידו עם דמות קוריאנית</h2>
+        <div class="price">4 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין שייק נידו עם דמות קוריאנית" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+
+
+    <div class="card">
+      <img src="מוציא עיניים/חתול לבן מוציא עיניים.jpeg" alt="חתול לבן מוציא עיניים">
+      <div class="card-body">
+        <h2>חתול לבן מוציא עיניים</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין חתול לבן מוציא עיניים" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="אורביז/חתול אורביז.jpg" alt="חתול אורביז">
+      <div class="card-body">
+        <h2>חתול אורביז</h2>
+        <div class="price">5 ש"ח</div>
+        <div class="color-note">⚡ חזר למלאי — אחרון!</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין חתול אורביז" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="נידו/פנדה נידו כתומה.jpeg" alt="פנדה נידו כתומה">
+      <div class="card-body">
+        <h2>פנדה נידו כתומה</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין פנדה נידו כתומה" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="מיים/ברווז מיים.jpg" alt="ברווז מיים">
+      <div class="card-body">
+        <h2>ברווז מיים</h2>
+        <div class="price">5 ש"ח</div>
+        <div class="color-note">⚡ אחרון במלאי!</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין ברווז מיים" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="מפריח בועה/ברווז מפריח בועה.jpg" alt="ברווז מפריח בועה" style="object-fit:contain;background:#f9f9f9;">
+      <div class="card-body">
+        <h2>ברווז מפריח בועה</h2>
+        <div class="price">6 ש"ח</div>
+        <div class="color-chips">
+          <span class="color-chip" style="background:#e6b800" data-color="צהוב" onclick="selectColor(this)">צהוב</span>
+          <span class="color-chip" style="background:#ff69b4" data-color="ורוד" onclick="selectColor(this)">ורוד</span>
+        </div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין ברווז מפריח בועה" target="_blank" data-base="ברווז מפריח בועה">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="מיים/תות מיים.jpg" alt="תות מיים">
+      <div class="card-body">
+        <h2>תות מיים</h2>
+        <div class="price">5 ש"ח</div>
+        <div class="color-note">⚡ אחרון במלאי!</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין תות מיים" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+
+    <div class="card">
+      <img src="נידו/חיפושית נידו סגולה.jpg" alt="חיפושית נידו סגולה">
+      <div class="card-body">
+        <h2>חיפושית נידו סגולה</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין חיפושית נידו סגולה" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="נידו/דרגון פרוט נידו.jpg" alt="דרגון פרוט נידו">
+      <div class="card-body">
+        <h2>דרגון פרוט נידו</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין דרגון פרוט נידו" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="פופ אפ/פופ אפ קקטוס תכלת+ירוק.jpg" alt="פופ אפ קקטוס">
+      <div class="card-body">
+        <h2>פופ אפ קקטוס</h2>
+        <div class="price">3 ש"ח</div>
+        <div class="color-chips">
+          <span class="color-chip" style="background:#40c4ff" data-color="תכלת" onclick="selectColor(this)">תכלת</span>
+          <span class="color-chip" style="background:#4caf50;opacity:0.45;text-decoration:line-through;cursor:default" title="אזל מהמלאי">ירוק</span>
+        </div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין פופ אפ קקטוס" target="_blank" data-base="פופ אפ קקטוס">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="פופ אפ/פופ אפ קקטוס צהוב+ורוד.jpeg" alt="פופ אפ קקטוס">
+      <div class="card-body">
+        <h2>פופ אפ קקטוס</h2>
+        <div class="price">3 ש"ח</div>
+        <div class="color-chips">
+          <span class="color-chip" style="background:#e6b800" data-color="צהוב" onclick="selectColor(this)">צהוב</span>
+          <span class="color-chip" style="background:#ff69b4" data-color="ורוד" onclick="selectColor(this)">ורוד</span>
+        </div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין פופ אפ קקטוס" target="_blank" data-base="פופ אפ קקטוס">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="פופ אפ/פופ אפ קלמנטינה.jpg" alt="פופ אפ קלמנטינה">
+      <div class="card-body">
+        <h2>פופ אפ קלמנטינה</h2>
+        <div class="price">3 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין פופ אפ קלמנטינה" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="פופ אפ/פופ אפ אגס.jpg" alt="פופ אפ אגס">
+      <div class="card-body">
+        <h2>פופ אפ אגס</h2>
+        <div class="price">3 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין פופ אפ אגס" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="פופ אפ/פופ אפ אננס.jpg" alt="פופ אפ אננס">
+      <div class="card-body">
+        <h2>פופ אפ אננס</h2>
+        <div class="price">3 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין פופ אפ אננס" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="פופ אפ/פופ אפ עכבר יוצא מגבינה.jpg" alt="פופ אפ עכבר יוצא מגבינה">
+      <div class="card-body">
+        <h2>פופ אפ עכבר יוצא מגבינה</h2>
+        <div class="price">3 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין פופ אפ עכבר יוצא מגבינה" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="מוציא עיניים/כלב מוציא עיניים.jpg" alt="כלב מוציא עיניים">
+      <div class="card-body">
+        <h2>כלב מוציא עיניים</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין כלב מוציא עיניים" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="נידו/המבורגר נידו.jpg" alt="המבורגר נידו">
+      <div class="card-body">
+        <h2>המבורגר נידו</h2>
+        <div class="price">7 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין המבורגר נידו" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="נידו/מפלצת בעמ נידו צהובה.jpg" alt="מפלצת בעמ נידו צהובה">
+      <div class="card-body">
+        <h2>מפלצת בעמ נידו צהובה</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין מפלצת בעמ נידו צהובה" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="מוציא עיניים/מפלצת בעמ מוציאה עין.jpg" alt="מפלצת בעמ מוציאה עין">
+      <div class="card-body">
+        <h2>מפלצת בעמ מוציאה עין</h2>
+        <div class="price">6 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין מפלצת בעמ מוציאה עין" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="נידו/עגבניה מיני נידו.jpg" alt="עגבניה מיני נידו">
+      <div class="card-body">
+        <h2>עגבניה מיני נידו</h2>
+        <div class="price">2 ש"ח</div>
+        <a class="order-btn" href="https://wa.me/9720549544353?text=היי גאיה! אני רוצה להזמין עגבניה מיני נידו" target="_blank">🛒 להזמנה בוואטסאפ</a>
+      </div>
+    </div><div class="search-empty" id="searchEmpty">לא נמצאו מוצרים 🌿</div>
+  </div>
+</div>
+
+
 
 <section class="testimonials-section">
   <h2>💬 מה אומרים הלקוחות</h2>
@@ -1797,6 +1865,11 @@
       <div class="t-stars">⭐⭐⭐⭐⭐</div>
       <div class="t-text">"ממש כיף להזמין! הגיע מהר ועם הפתעה קטנה בפנים 🎁 כבר הזמנתי שוב!"</div>
       <div class="t-name">— שירה, 13</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="t-stars">⭐⭐⭐⭐⭐</div>
+      <div class="t-text">"בובספוג נידו פשוט מושלם!! והמחירים הכי זולים שראיתי — איפה היית עד עכשיו?! 🧽💕"</div>
+      <div class="t-name">— דנה, 11</div>
     </div>
   </div>
 </section>
@@ -1905,6 +1978,10 @@
       originalOrder.forEach(function(card) { grid.appendChild(card); });
       return;
     }
+    if (mode === 'new') {
+      originalOrder.slice().reverse().forEach(function(card) { grid.appendChild(card); });
+      return;
+    }
     var cards = Array.from(grid.querySelectorAll('.card'));
     cards.sort(function(a, b) {
       var pa = parseInt(a.querySelector('.price').textContent.match(/\d+/)[0]);
@@ -1942,12 +2019,36 @@
 
   /* ===== עגלת קניות ===== */
   var cart = [];
+  var CART_VER = 2;
 
-  function saveCart() { localStorage.setItem('gaiaCart', JSON.stringify(cart)); }
+  function saveCart() {
+    localStorage.setItem('gaiaCart', JSON.stringify({ v: CART_VER, items: cart }));
+  }
 
   function loadCart() {
-    try { cart = JSON.parse(localStorage.getItem('gaiaCart')) || []; } catch(e) { cart = []; }
+    try {
+      var raw = JSON.parse(localStorage.getItem('gaiaCart'));
+      cart = (raw && raw.v === CART_VER) ? (raw.items || []) : [];
+    } catch(e) { cart = []; }
+    saveCart();
     renderCart();
+  }
+
+  function addFeaturedToCart(btn) {
+    var section = btn.closest('.featured-section');
+    var name    = section.querySelector('h3').textContent.trim();
+    var price   = parseInt(section.querySelector('.featured-price').textContent.match(/\d+/)[0]);
+    var existing = cart.find(function(i) { return i.key === name; });
+    if (existing) { existing.qty += 1; }
+    else          { cart.push({ key: name, price: price, qty: 1 }); }
+    saveCart();
+    renderCart();
+    flyToCart(btn);
+    var orig = btn.innerHTML;
+    btn.innerHTML = '✅ נוסף!';
+    btn.disabled = true;
+    setTimeout(function() { btn.innerHTML = orig; btn.disabled = false; }, 1100);
+    openCart();
   }
 
   function addToCart(btn) {
@@ -1983,6 +2084,21 @@
     btn.disabled  = true;
     setTimeout(function() { btn.innerHTML = orig; btn.disabled = false; }, 1100);
     openCart();
+
+    // הדגש את הפריט החדש בעגלה
+    var addedKey = key;
+    setTimeout(function() {
+      var cartItemEls = document.querySelectorAll('#cartItems .cart-item');
+      var addedIdx = cart.findIndex(function(i) { return i.key === addedKey; });
+      if (addedIdx >= 0 && cartItemEls[addedIdx]) {
+        var newEl = cartItemEls[addedIdx];
+        newEl.classList.remove('cart-item-new');
+        void newEl.offsetWidth; // reset animation
+        newEl.classList.add('cart-item-new');
+        newEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        setTimeout(function() { newEl.classList.remove('cart-item-new'); }, 1600);
+      }
+    }, 280);
   }
 
   function renderCart() {
@@ -2028,18 +2144,20 @@
 
   function sendOrder() {
     if (!cart.length) { alert('העגלה ריקה!'); return; }
-    var lines = cart.map(function(i) { return '• ' + i.key + ' × ' + i.qty + ' = ' + (i.price * i.qty) + ' ש"ח'; }).join('\n');
+    var lines = cart.map(function(i) { return '• ' + i.key + ' × ' + i.qty + ' = ' + (i.price * i.qty) + ' ש"ח'; }).join('\
+');
     var total = cart.reduce(function(s,i) { return s + i.price * i.qty; }, 0);
-    window.open('https://wa.me/9720549544353?text=' + encodeURIComponent('היי גאיה! אני רוצה להזמין:\n' + lines + '\n\nסה"כ: ' + total + ' ש"ח'), '_blank');
+    window.open('https://wa.me/9720549544353?text=' + encodeURIComponent('היי גאיה! אני רוצה להזמין:\
+' + lines + '\
+\
+סה"כ: ' + total + ' ש"ח'), '_blank');
   }
 
   /* ===== אתחול: תגיות, zoom, כמות, כפתורי עגלה ===== */
   var BADGES = {
     'ארנב מוציא עיניים':            { text: '🔥 פופולרי', cls: '' },
     'חתול ורוד מוציא עיניים':       { text: '🔥 פופולרי', cls: '' },
-    'פנדה נידו בשני צבעים':         { text: '⭐ מומלץ',   cls: '' },
     'אקסולטל קרח בשלושה צבעים':     { text: '✨ חדש',     cls: 'new' },
-    'לב נידו מיים':                 { text: '✨ חדש',     cls: 'new' },
     'פופ אפ':                       { text: '💰 הכי זול', cls: '' },
   };
 
@@ -2056,7 +2174,7 @@
 
     // תמונה ניתנת להגדלה
     var img = card.querySelector('img');
-    img.addEventListener('click', function() { openZoom(img); });
+    if (img) img.addEventListener('click', function() { openZoom(img); });
 
     // בורר כמות
     var orderLink = card.querySelector('a.order-btn');
@@ -2091,19 +2209,10 @@
 
   /* ===== מלאי ===== */
   var STOCK = {
-    'פנדה נידו בשני צבעים':          'out',
-    'דג קרח':                         'out',
     'שייק נידו עם דמות קוריאנית':    'limited',
     'אקסולטל קרח בשלושה צבעים':      'limited',
-    'תרנגול נידו':                    'out',
-    'ארנב נידו':                      'out',
     'חתול ורוד מוציא עיניים':        'limited',
-    'לב נידו מיים':                   'out',
-    'מיניון מיים':                    'out',
     'פנדה נידו כתומה':               'limited',
-    'דמות נידו':                     'out',
-    'כלב כחול מוציא עיניים':        'out',
-    'סנטה נידו':                     'out',
     'חתול לבן מוציא עיניים':        'limited',
     'תות מיים':                      'limited',
   };
@@ -2112,9 +2221,12 @@
     if (STOCK[name] === 'out') {
       var overlay = document.createElement('div');
       overlay.className = 'stock-out-overlay';
-      overlay.innerHTML =
-        '<div class="stock-out-text">😔 אזל מהמלאי</div>' +
-        '<button class="notify-btn" onclick="notifyMe(\'' + name.replace(/'/g,"\\'") + '\')">📲 הודיעי לי כשיחזור</button>';
+      overlay.innerHTML = '<div class="stock-out-text">😔 אזל מהמלאי</div>';
+      var notifyBtn = document.createElement('button');
+      notifyBtn.className = 'notify-btn';
+      notifyBtn.textContent = '📲 הודיעי לי כשיחזור';
+      notifyBtn.onclick = (function(n) { return function() { notifyMe(n); }; })(name);
+      overlay.appendChild(notifyBtn);
       card.querySelector('.card-body').appendChild(overlay);
     } else if (STOCK[name] === 'limited') {
       var limitTag = document.createElement('div');
@@ -2157,7 +2269,8 @@
 
   /* ===== שיתוף מוצר ===== */
   function shareProduct(name, price) {
-    var text = '✨ תראי! מצאתי "' + name + '" ב-' + price + ' בחנות של גאיה 🌟\nכנסי ותזמיני!';
+    var text = '✨ תראי! מצאתי "' + name + '" ב-' + price + ' בחנות של גאיה 🌟\
+כנסי ותזמיני!';
     if (navigator.share) {
       navigator.share({ title: 'הסקוושיה של גאיה', text: text }).catch(function() {});
     } else {
@@ -2206,6 +2319,7 @@
 
   /* ===== כפתורי שיתוף על כרטיסים ===== */
   document.querySelectorAll('.card').forEach(function(card) {
+    if (!card.querySelector('h2') || !card.querySelector('.price') || !card.querySelector('.card-body')) return;
     var name = card.querySelector('h2').textContent.trim();
     var priceText = card.querySelector('.price').textContent.trim();
     var body = card.querySelector('.card-body');
@@ -2272,13 +2386,13 @@
 
   /* ===== קטגוריות ===== */
   var CATS = [
-    { name: 'נידו',         emoji: '🧸', color: '#fde8ff,#f5d0ff', img: 'נידו.png',                              products: ['אפון נידו בשלושה צבעים','ארנב נידו','ארנבה נידו גזר בשני צבעים','חללית נידו בשני צבעים','דמות נידו','מקרון נידו בשני צבעים','מפלצת נידו בשני צבעים','סנטה נידו','פנדה נידו בשני צבעים','שייק נידו עם דמות קוריאנית','תרנגול נידו','פנדה נידו כתומה','חיפושית נידו סגולה','דרגון פרוט נידו','המבורגר נידו','עגבניה מיני נידו','מפלצת בעמ נידו צהובה'] },
-    { name: 'מיים',         emoji: '💧', color: '#e0f4ff,#c8eeff', img: 'מיים.jpeg',                         products: ['ביצת מיים סגולה','ביצת מיים','לב נידו מיים','מיניון מיים','ברווז מיים','תות מיים','עכבר מיים שחור'] },
-    { name: 'קרח',          emoji: '🧊', color: '#e8f8ff,#d0f0ff', img: 'קרח.png',        products: ['אקסולטל קרח בשלושה צבעים','ביצת קרח סגולה','דג קרח','בננה קרח'] },
-    { name: 'מוציא עיניים', emoji: '👀', color: '#fff0e0,#ffe4c4', img: 'מוציא עיניים.png',     products: ['ארנב מוציא עיניים','חתול ורוד מוציא עיניים','חתול צהוב מוציא עיניים','חמור סגול מוציא עיניים','כלב כחול מוציא עיניים','כלב שוכב מוציא עיניים חום','חתול לבן מוציא עיניים','כלב מוציא עיניים','מפלצת בעמ מוציאה עין'] },
-    { name: 'פופ אפים',     emoji: '🎯', color: '#fffbe0,#fff0c0', img: 'פופ אפים.png',          products: ['פופ אפ','פופ אפ קקטוס','פופ אפ קלמנטינה','פופ אפ אגס','פופ אפ אננס','פופ אפ עכבר יוצא מגבינה'] },
-    { name: 'מפריחי בועה',  emoji: '🫧', color: '#e8f8ff,#d0f0ff', img: 'מפריחי בועה.png',      products: ['ברווז מפריח בועה'] },
-    { name: 'אורביז',       emoji: '🔮', color: '#f0e8ff,#e0d0ff', img: 'אורביז.png',            products: ['חתול אורביז'] },
+    { name: 'נידו',         emoji: '🧸', color: '#fde8ff,#f5d0ff', img: 'נידו/נידו.png',                              products: ['בובספוג נידו','קוראסון נידו','גזר נידו','בננה מיני נידו','לחם נידו ירוק','אווז נידו','שלט נידו נינטנדו כתום','אפון נידו בשלושה צבעים','ארנבה נידו גזר בשני צבעים','חללית נידו בשני צבעים','מקרון נידו בשני צבעים','שייק נידו עם דמות קוריאנית','פנדה נידו כתומה','חיפושית נידו סגולה','דרגון פרוט נידו','המבורגר נידו','עגבניה מיני נידו','מפלצת בעמ נידו צהובה'] },
+    { name: 'מיים',         emoji: '💧', color: '#e0f4ff,#c8eeff', img: 'מיים/מיים.jpeg',                         products: ['ביצת מיים סגולה','ביצת מיים','ברווז מיים','תות מיים'] },
+    { name: 'קרח',          emoji: '🧊', color: '#e8f8ff,#d0f0ff', img: 'קרח/קרח.png',        products: ['תרנגול קרח','ענבים קרח','כלב קרח','אקסולטל קרח בשלושה צבעים','ביצת קרח סגולה'] },
+    { name: 'מוציא עיניים', emoji: '👀', color: '#fff0e0,#ffe4c4', img: 'מוציא עיניים/מוציא עיניים.png',     products: ['כריש מוציא עין','ארנב מוציא עיניים','חתול ורוד מוציא עיניים','חתול צהוב מוציא עיניים','חמור סגול מוציא עיניים','כלב שוכב מוציא עיניים חום','חתול לבן מוציא עיניים','כלב מוציא עיניים','מפלצת בעמ מוציאה עין'] },
+    { name: 'פופ אפים',     emoji: '🎯', color: '#fffbe0,#fff0c0', img: 'פופ אפ/פופ אפים.png',          products: ['פופ אפ','פופ אפ קקטוס','פופ אפ קלמנטינה','פופ אפ אגס','פופ אפ אננס','פופ אפ עכבר יוצא מגבינה'] },
+    { name: 'מפריחי בועה',  emoji: '🫧', color: '#e8f8ff,#d0f0ff', img: 'מפריח בועה/מפריחי בועה.png',      products: ['חילזון מפריח בועה','ברווז מפריח בועה'] },
+    { name: 'אורביז',       emoji: '🔮', color: '#f0e8ff,#e0d0ff', img: 'אורביז/אורביז.png',            products: ['חתול אורביז'] },
     { name: 'גאיה תבחרי לי', emoji: '🎁', color: '#ffe8f4,#ffd0e8', img: 'גאיה תבחרי לי.png',  products: [], isGaiaPick: true },
   ];
 
@@ -2290,9 +2404,11 @@
     CATS.forEach(function(cat, i) {
       var card = document.createElement('div');
       card.className = 'category-card';
+      var fallbackStyle = 'background:linear-gradient(135deg,' + cat.color + ')';
       var imgHtml = cat.img
-        ? '<img src="' + cat.img + '" alt="' + cat.name + '">'
-        : '<div class="cat-no-img" style="background:linear-gradient(135deg,'+cat.color+')">' + cat.emoji + '</div>';
+        ? '<img src="' + cat.img + '" alt="' + cat.name + '" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">' +
+          '<div class="cat-no-img" style="display:none;' + fallbackStyle + '">' + cat.emoji + '</div>'
+        : '<div class="cat-no-img" style="' + fallbackStyle + '">' + cat.emoji + '</div>';
       card.innerHTML = imgHtml + '<div class="category-card-name">' + cat.name + '</div>';
       card.addEventListener('click', function() { selectCategory(i); });
       grid.appendChild(card);
@@ -2328,7 +2444,13 @@
         var name = card.querySelector('h2') ? card.querySelector('h2').textContent.trim() : '';
         var show = cat.products.indexOf(name) !== -1;
         card.style.display = show ? '' : 'none';
-        if (show) anyVisible = true;
+        if (show) {
+          card.classList.remove('scroll-hidden');
+          card.classList.add('visible');
+          card.style.opacity = '1';
+          card.style.transform = 'none';
+          anyVisible = true;
+        }
       });
       var emptyEl = document.getElementById('searchEmpty');
       if (emptyEl) { emptyEl.textContent = 'לא נמצאו מוצרים 🌿'; emptyEl.style.display = anyVisible ? 'none' : 'block'; }
@@ -2341,7 +2463,7 @@
   function clearCatFilter() {
     activeCatIdx = null;
     document.querySelectorAll('.category-card').forEach(function(c) { c.classList.remove('active'); });
-    document.querySelectorAll('.products .card').forEach(function(c) { c.style.display = ''; });
+    document.querySelectorAll('.products .card').forEach(function(c) { c.style.display = ''; c.classList.add('visible'); });
     document.getElementById('catClearBtn').style.display = 'none';
     document.getElementById('gaiaPick').style.display = 'none';
     var emptyEl = document.getElementById('searchEmpty');
